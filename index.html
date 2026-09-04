@@ -10,369 +10,168 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #fff8ec;
-    color: #3b2417;
-}
-
-button {
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
+    background: #fff8ed;
+    color: #4a2b18;
 }
 
 .app {
     max-width: 480px;
     margin: auto;
     min-height: 100vh;
-    background: #fff8ec;
+    background: #fff8ed;
+    padding-bottom: 80px;
 }
 
-/* ================= HEADER ================= */
-
-.header {
-    background: #4a2b1b;
-    color: white;
-    padding: 18px 20px;
+header {
+    background: #f6a623;
+    padding: 14px 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
-    z-index: 20;
+    z-index: 10;
+    box-shadow: 0 3px 10px rgba(0,0,0,.12);
 }
 
 .logo {
-    font-weight: 900;
-    font-size: 21px;
-    line-height: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #4a2b18;
 }
 
-.logo span {
-    color: #ffb52e;
+.logo img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: white;
 }
 
 .cart-icon {
-    background: #ffb52e;
-    color: #3b2417;
+    background: #fff8ed;
+    border: none;
     border-radius: 50%;
     width: 42px;
     height: 42px;
-    font-size: 19px;
-    position: relative;
+    font-size: 20px;
+    cursor: pointer;
 }
-
-.cart-count {
-    position: absolute;
-    right: -3px;
-    top: -4px;
-    background: #e65325;
-    color: white;
-    border-radius: 50%;
-    width: 19px;
-    height: 19px;
-    font-size: 11px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* ================= SCREENS ================= */
 
 .screen {
     display: none;
-    padding-bottom: 90px;
+    padding: 20px;
 }
 
 .screen.active {
     display: block;
 }
 
-.container {
-    padding: 20px;
-}
-
-/* ================= HOME ================= */
-
 .hero {
-    background: #f29b27;
-    margin: 18px;
-    border-radius: 25px;
-    padding: 30px 22px;
-    color: #3b2417;
+    background: #5a351f;
+    color: white;
+    border-radius: 22px;
+    padding: 28px 20px;
+    margin-bottom: 22px;
 }
 
 .hero h1 {
-    font-size: 38px;
-    line-height: 0.95;
-    font-weight: 900;
-    text-transform: uppercase;
+    font-size: 30px;
+    margin-bottom: 8px;
 }
 
 .hero p {
-    margin-top: 15px;
     font-size: 15px;
-}
-
-.fake-hotdog {
-    font-size: 80px;
-    text-align: center;
-    margin: 15px 0;
-}
-
-.main-button {
-    width: 100%;
-    padding: 15px;
-    border-radius: 13px;
-    background: #4a2b1b;
-    color: white;
-    font-weight: bold;
-    font-size: 15px;
-    margin-top: 12px;
-}
-
-.secondary-button {
-    width: 100%;
-    padding: 15px;
-    border-radius: 13px;
-    background: white;
-    color: #4a2b1b;
-    font-weight: bold;
-    font-size: 15px;
-    margin-top: 10px;
-    border: 2px solid #4a2b1b;
+    line-height: 1.5;
 }
 
 .section-title {
-    font-size: 26px;
-    font-weight: 900;
-    margin-bottom: 15px;
+    font-size: 22px;
+    margin: 20px 0 14px;
 }
 
-.home-card {
+.card {
     background: white;
     border-radius: 18px;
-    padding: 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 3px 10px rgba(59,36,23,.08);
-}
-
-.home-card h3 {
-    font-size: 21px;
-    margin-bottom: 7px;
-}
-
-.home-card p {
-    color: #765f51;
-    font-size: 14px;
-}
-
-/* ================= PRODUCTS ================= */
-
-.product-card {
-    background: white;
-    border-radius: 20px;
     padding: 18px;
-    margin-bottom: 15px;
-    box-shadow: 0 3px 10px rgba(59,36,23,.08);
-}
-
-.product-image {
-    background: #ffe0a3;
-    border-radius: 16px;
-    height: 130px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 70px;
     margin-bottom: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
 }
 
-.product-card h3 {
-    font-size: 21px;
-}
-
-.product-description {
-    font-size: 13px;
-    color: #765f51;
-    margin: 5px 0 12px;
-}
-
-.product-bottom {
+.product {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product h3 {
+    margin-bottom: 5px;
+}
+
+.product p {
+    color: #80634e;
+    font-size: 14px;
+    line-height: 1.4;
 }
 
 .price {
-    font-weight: 900;
-    font-size: 19px;
-}
-
-.add-button {
-    background: #f29b27;
-    padding: 11px 17px;
-    border-radius: 11px;
     font-weight: bold;
+    margin-top: 8px;
+    color: #e67e00;
 }
 
-/* ================= CART ================= */
-
-.cart-item {
-    background: white;
-    padding: 16px;
-    border-radius: 15px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.quantity {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.quantity button {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #f29b27;
+.btn {
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    margin-top: 12px;
+    font-size: 16px;
     font-weight: bold;
+    cursor: pointer;
+    background: #f6a623;
+    color: #4a2b18;
 }
 
-.total-box {
-    background: #4a2b1b;
+.btn.dark {
+    background: #5a351f;
     color: white;
-    border-radius: 18px;
-    padding: 20px;
-    margin-top: 20px;
 }
 
-.total-row {
+.btn.light {
+    background: #fff0d4;
+}
+
+.choice {
     display: flex;
-    justify-content: space-between;
-    font-size: 18px;
+    gap: 10px;
+    margin-top: 12px;
 }
 
-.total-row strong {
-    font-size: 24px;
-}
-
-/* ================= CALENDAR ================= */
-
-.calendar {
+.choice button {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #f6a623;
+    border-radius: 12px;
     background: white;
-    border-radius: 20px;
-    padding: 18px;
-    box-shadow: 0 3px 10px rgba(59,36,23,.08);
-}
-
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 18px;
-}
-
-.calendar-header button {
-    background: #f29b27;
-    border-radius: 9px;
-    width: 35px;
-    height: 35px;
-}
-
-.calendar-title {
-    font-size: 18px;
-    font-weight: 900;
-}
-
-.weekdays,
-.days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-}
-
-.weekdays div {
-    text-align: center;
-    font-size: 11px;
-    font-weight: bold;
-    color: #8b7465;
-    padding-bottom: 8px;
-}
-
-.day {
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 13px;
-}
-
-.day.available {
-    background: #fff2d5;
     cursor: pointer;
 }
 
-.day.available:hover {
-    background: #f29b27;
-}
-
-.day.occupied {
-    background: #e5dcd6;
-    color: #9b8d84;
-    text-decoration: line-through;
-}
-
-.day.selected {
-    background: #4a2b1b;
-    color: white;
-}
-
-.legend {
-    display: flex;
-    gap: 15px;
-    font-size: 11px;
-    margin-top: 15px;
-}
-
-.legend span {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
-
-.dot.green {
-    background: #f29b27;
-}
-
-.dot.red {
-    background: #aaa;
-}
-
-/* ================= FORMS ================= */
-
-.form-group {
-    margin-bottom: 17px;
-}
-
-.form-group label {
-    display: block;
+.choice button.selected {
+    background: #f6a623;
     font-weight: bold;
-    margin-bottom: 7px;
 }
 
 input,
@@ -380,98 +179,108 @@ select,
 textarea {
     width: 100%;
     padding: 13px;
-    border-radius: 11px;
-    border: 1px solid #d6c5b7;
+    border: 1px solid #d8c6b5;
+    border-radius: 12px;
+    margin-top: 7px;
+    margin-bottom: 14px;
+    font-size: 15px;
     background: white;
-    font-family: inherit;
+}
+
+label {
+    font-weight: bold;
     font-size: 14px;
 }
 
-textarea {
-    min-height: 90px;
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
 
-.choice-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.choice {
-    background: white;
-    border: 2px solid #eadbd0;
-    border-radius: 14px;
-    padding: 15px;
-    text-align: center;
+.calendar-header button {
+    border: none;
+    background: #f6a623;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
     cursor: pointer;
+    font-size: 18px;
 }
 
-.choice.selected {
-    border-color: #f29b27;
-    background: #fff0cd;
+.calendar-title {
+    font-size: 20px;
+    font-weight: bold;
 }
 
-/* ================= STATUS ================= */
+.weekdays,
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.weekdays div {
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #80634e;
+}
+
+.day {
+    aspect-ratio: 1;
+    border: none;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.day.empty {
+    background: transparent;
+    cursor: default;
+}
+
+.day.occupied {
+    background: #d9534f;
+    color: white;
+    cursor: not-allowed;
+}
+
+.day.selected {
+    background: #f6a623;
+    color: #4a2b18;
+}
+
+.note {
+    background: #fff0d4;
+    border-radius: 14px;
+    padding: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
 
 .success {
     text-align: center;
-    padding: 45px 20px;
+    padding: 35px 15px;
 }
 
 .success-icon {
-    font-size: 75px;
-    margin-bottom: 20px;
+    font-size: 60px;
+    margin-bottom: 15px;
 }
 
-.success h1 {
-    font-size: 29px;
-    margin-bottom: 10px;
+.combo {
+    border: 2px solid transparent;
+    cursor: pointer;
 }
 
-.status {
-    display: inline-block;
-    padding: 7px 12px;
-    border-radius: 20px;
-    background: #fff0c9;
-    font-size: 12px;
-    font-weight: bold;
-    margin-top: 12px;
+.combo.selected {
+    border-color: #f6a623;
+    background: #fff5df;
 }
-
-/* ================= ADMIN ================= */
-
-.admin-card {
-    background: white;
-    padding: 18px;
-    border-radius: 17px;
-    margin-bottom: 12px;
-    box-shadow: 0 3px 10px rgba(59,36,23,.07);
-}
-
-.admin-card h3 {
-    margin-bottom: 7px;
-}
-
-.admin-stat {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.stat {
-    background: #f29b27;
-    border-radius: 15px;
-    padding: 15px 8px;
-    text-align: center;
-}
-
-.stat strong {
-    display: block;
-    font-size: 22px;
-}
-
-/* ================= BOTTOM NAV ================= */
 
 .bottom-nav {
     position: fixed;
@@ -480,44 +289,71 @@ textarea {
     transform: translateX(-50%);
     width: 100%;
     max-width: 480px;
-    height: 70px;
     background: white;
-    border-top: 1px solid #eadbd0;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    z-index: 30;
-}
-
-.nav-button {
-    background: white;
-    color: #806b5d;
-    font-size: 11px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
+    justify-content: space-around;
+    padding: 10px 5px;
+    box-shadow: 0 -3px 15px rgba(0,0,0,.12);
+    z-index: 20;
 }
 
-.nav-button.active {
-    color: #e87920;
-    font-weight: bold;
+.nav-btn {
+    border: none;
+    background: none;
+    color: #80634e;
+    font-size: 11px;
+    cursor: pointer;
 }
 
-.nav-icon {
+.nav-btn span {
+    display: block;
     font-size: 21px;
+    margin-bottom: 3px;
 }
 
-/* ================= BACK ================= */
+.admin-box {
+    background: #5a351f;
+    color: white;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
 
-.back {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: transparent;
+.admin-number {
+    font-size: 30px;
     font-weight: bold;
-    margin-bottom: 18px;
-    color: #4a2b1b;
+    margin-top: 8px;
+}
+
+.cart-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.qty {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qty button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    background: #f6a623;
+    cursor: pointer;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 18px;
 }
 </style>
 </head>
@@ -526,967 +362,498 @@ textarea {
 
 <div class="app">
 
-<header class="header">
+<header>
     <div class="logo">
-        CLUB<br><span>DE LOS PANCHOS</span>
+        <img src="logopanchos.jpg.JPG" alt="Club de los Panchos">
+        <span>Club de los Panchos</span>
     </div>
 
-    <button class="cart-icon" onclick="showScreen('cart')">
-        🛒
-        <span class="cart-count" id="cartCount">0</span>
-    </button>
+    <button class="cart-icon" onclick="showScreen('cart')">🛒</button>
 </header>
 
-
-<!-- ================= INICIO ================= -->
-
+<!-- INICIO -->
 <section id="home" class="screen active">
 
     <div class="hero">
-        <div class="fake-hotdog">🌭</div>
-
-        <h1>El Club<br>de los<br>Panchos</h1>
-
+        <h1>🌭 Bienvenido al Club</h1>
         <p>
-            Panchos, eventos y un carrito que llega
-            directo a tu fiesta.
+            Panchos ricos, simples y con mucho club.
+            Pedí para retirar o reservá nuestro servicio para tu evento.
         </p>
+    </div>
 
-        <button class="main-button"
-                onclick="showScreen('menu')">
-            🌭 PEDIR AHORA
-        </button>
+    <h2 class="section-title">¿Qué querés hacer?</h2>
 
-        <button class="secondary-button"
-                onclick="startEventReservation()">
-            🚚 RESERVAR PARA UN EVENTO
+    <div class="card">
+        <h3>🌭 Pedir panchos</h3>
+        <p>Elegí tus panchos y prepará tu pedido para retirar.</p>
+        <button class="btn" onclick="showScreen('menu')">
+            Ver menú
         </button>
     </div>
 
-    <div class="container">
-
-        <h2 class="section-title">
-            ¿Qué estás buscando?
-        </h2>
-
-        <div class="home-card"
-             onclick="showScreen('menu')">
-
-            <h3>🌭 Pedí para retirar</h3>
-
-            <p>
-                Elegí tu pancho, hacé tu pedido
-                y pasá a retirarlo por el local.
-            </p>
-        </div>
-
-        <div class="home-card"
-             onclick="startEventReservation()">
-
-            <h3>🚚 Llevamos el Club a tu fiesta</h3>
-
-            <p>
-                Reservá nuestro carrito para cumpleaños,
-                fiestas y eventos.
-            </p>
-        </div>
-
-        <div class="home-card">
-
-            <h3>🌙 Nuestro local</h3>
-
-            <p>
-                Atención en el local durante la noche.
-            </p>
-
-            <p style="margin-top:8px;">
-                💳 Efectivo · Transferencia
-            </p>
-
-        </div>
-
+    <div class="card">
+        <h3>🚚 Llevar el Club a tu evento</h3>
+        <p>
+            Reservá nuestro carrito para cumpleaños,
+            fiestas y eventos.
+        </p>
+        <button class="btn dark" onclick="showScreen('events')">
+            Reservar evento
+        </button>
     </div>
+
+    <div class="note">
+        🌙 <b>Pedidos para retirar:</b> el local funciona únicamente
+        durante la noche.
+    </div>
+
 </section>
 
-
-<!-- ================= MENU ================= -->
-
+<!-- MENU -->
 <section id="menu" class="screen">
 
-    <div class="container">
+    <h2 class="section-title">Nuestro menú 🌭</h2>
 
-        <h2 class="section-title">🌭 El menú</h2>
-
-        <div class="product-card">
-
-            <div class="product-image">🌭</div>
-
-            <h3>Pancho Normal</h3>
-
-            <p class="product-description">
-                El clásico del Club.
-            </p>
-
-            <div class="product-bottom">
-
-                <span class="price">$ —</span>
-
-                <button class="add-button"
-                        onclick="addToCart('Pancho Normal')">
-                    + AGREGAR
-                </button>
-
-            </div>
-
+    <div class="card product">
+        <div class="product-info">
+            <h3>Pancho Clásico</h3>
+            <p>Pan + pancho + los ingredientes que elijas.</p>
+            <div class="price">$ —</div>
         </div>
 
-
-        <div class="product-card">
-
-            <div class="product-image">🌭</div>
-
-            <h3>Pancho Extra Largo</h3>
-
-            <p class="product-description">
-                Más largo. Más pancho.
-            </p>
-
-            <div class="product-bottom">
-
-                <span class="price">$ —</span>
-
-                <button class="add-button"
-                        onclick="addToCart('Pancho Extra Largo')">
-                    + AGREGAR
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <h2 class="section-title"
-            style="margin-top:30px;">
-            🍟 Combos
-        </h2>
-
-
-        <div class="product-card">
-
-            <h3>Combo 1</h3>
-
-            <p class="product-description">
-                Próximamente se definirá qué incluye.
-            </p>
-
-            <div class="product-bottom">
-                <span class="price">$ —</span>
-
-                <button class="add-button"
-                        onclick="addToCart('Combo 1')">
-                    + AGREGAR
-                </button>
-            </div>
-
-        </div>
-
-
-        <div class="product-card">
-
-            <h3>Combo 2</h3>
-
-            <p class="product-description">
-                Próximamente se definirá qué incluye.
-            </p>
-
-            <div class="product-bottom">
-                <span class="price">$ —</span>
-
-                <button class="add-button"
-                        onclick="addToCart('Combo 2')">
-                    + AGREGAR
-                </button>
-            </div>
-
-        </div>
-
-
-        <div class="product-card">
-
-            <h3>Combo 3</h3>
-
-            <p class="product-description">
-                Próximamente se definirá qué incluye.
-            </p>
-
-            <div class="product-bottom">
-                <span class="price">$ —</span>
-
-                <button class="add-button"
-                        onclick="addToCart('Combo 3')">
-                    + AGREGAR
-                </button>
-            </div>
-
-        </div>
-
-
-        <div class="product-card">
-
-            <h3>Combo 4</h3>
-
-            <p class="product-description">
-                Próximamente se definirá qué incluye.
-            </p>
-
-            <div class="product-bottom">
-                <span class="price">$ —</span>
-
-                <button class="add-button"
-                        onclick="addToCart('Combo 4')">
-                    + AGREGAR
-                </button>
-            </div>
-
-        </div>
-
+        <button class="btn" onclick="addToCart('Pancho Clásico')">
+            Agregar
+        </button>
     </div>
+
+    <div class="card product">
+        <div class="product-info">
+            <h3>Pancho Extra Largo</h3>
+            <p>Para los que vienen con hambre de verdad.</p>
+            <div class="price">$ —</div>
+        </div>
+
+        <button class="btn" onclick="addToCart('Pancho Extra Largo')">
+            Agregar
+        </button>
+    </div>
+
+    <div class="note">
+        💰 Los precios todavía están en proceso de cálculo.
+    </div>
+
 </section>
 
-
-<!-- ================= CART ================= -->
-
+<!-- CARRITO -->
 <section id="cart" class="screen">
 
-    <div class="container">
+    <h2 class="section-title">Tu pedido 🛒</h2>
 
-        <h2 class="section-title">🛒 Tu pedido</h2>
-
-        <div id="cartItems"></div>
-
-        <div id="emptyCart"
-             style="text-align:center;padding:50px 10px;">
-
-            <div style="font-size:60px;">🌭</div>
-
-            <h3>Tu carrito está vacío</h3>
-
-            <p style="margin-top:8px;color:#806b5d;">
-                Agregá algo rico del menú.
-            </p>
-
-            <button class="main-button"
-                    onclick="showScreen('menu')">
-                VER MENÚ
-            </button>
-
-        </div>
-
-        <div id="cartTotal"
-             class="total-box"
-             style="display:none;">
-
-            <div class="total-row">
-                <span>Total</span>
-                <strong>$ —</strong>
-            </div>
-
-            <button class="main-button"
-                    style="background:#f29b27;color:#3b2417;"
-                    onclick="showScreen('orderData')">
-                CONTINUAR
-            </button>
-
-        </div>
-
+    <div class="card" id="cartItems">
+        <p>Tu carrito está vacío.</p>
     </div>
+
+    <div class="card">
+        <div class="total">
+            <span>Total</span>
+            <span>$ —</span>
+        </div>
+
+        <button class="btn dark" onclick="showScreen('orderData')">
+            Continuar pedido
+        </button>
+    </div>
+
 </section>
 
-
-<!-- ================= DATOS PEDIDO ================= -->
-
+<!-- DATOS PEDIDO -->
 <section id="orderData" class="screen">
 
-    <div class="container">
+    <h2 class="section-title">Datos del pedido</h2>
 
-        <button class="back"
-                onclick="showScreen('cart')">
-            ← Volver
-        </button>
+    <div class="card">
 
-        <h2 class="section-title">
-            Casi está 🌭
-        </h2>
+        <label>Nombre</label>
+        <input type="text" id="orderName" placeholder="Tu nombre">
 
-        <div class="form-group">
-            <label>Nombre</label>
-            <input id="orderName"
-                   type="text"
-                   placeholder="Tu nombre">
+        <label>Teléfono</label>
+        <input type="tel" id="orderPhone" placeholder="Tu teléfono">
+
+        <label>Hora para retirar</label>
+        <input type="time" id="pickupTime">
+
+        <div class="note">
+            🌙 Recordá que los pedidos para retirar se realizan
+            únicamente durante la noche.
         </div>
 
-        <div class="form-group">
-            <label>Teléfono</label>
-            <input id="orderPhone"
-                   type="tel"
-                   placeholder="Tu teléfono">
-        </div>
+        <label>Forma de pago</label>
+        <select id="payment">
+            <option value="">Seleccionar</option>
+            <option>Efectivo</option>
+            <option>Transferencia bancaria</option>
+        </select>
 
-        <div class="form-group">
-            <label>Fecha de retiro</label>
-            <input id="pickupDate"
-                   type="date">
-        </div>
-
-        <div class="form-group">
-            <label>Hora de retiro</label>
-            <input id="pickupTime"
-                   type="time">
-        </div>
-
-        <div class="form-group">
-            <label>Forma de pago</label>
-
-            <div class="choice-grid">
-
-                <div class="choice"
-                     onclick="selectChoice(this)">
-                    💵<br>Efectivo
-                </div>
-
-                <div class="choice"
-                     onclick="selectChoice(this)">
-                    🏦<br>Transferencia
-                </div>
-
-            </div>
-        </div>
-
-        <button class="main-button"
-                onclick="confirmOrder()">
-            CONFIRMAR PEDIDO
+        <button class="btn" onclick="confirmOrder()">
+            Confirmar pedido
         </button>
 
     </div>
+
 </section>
 
-
-<!-- ================= PEDIDO CONFIRMADO ================= -->
-
+<!-- PEDIDO CONFIRMADO -->
 <section id="orderSuccess" class="screen">
 
     <div class="success">
 
-        <div class="success-icon">🌭</div>
+        <div class="success-icon">✅</div>
 
-        <h1>¡Pedido confirmado!</h1>
+        <h2>¡Pedido recibido!</h2>
 
-        <p>
-            Recibimos tu pedido correctamente.
+        <p style="margin-top:12px;">
+            Tu pedido fue registrado correctamente.
         </p>
 
-        <div class="status">
-            Pedido #024 · Preparando
-        </div>
-
-        <button class="main-button"
-                onclick="showScreen('home')">
-            VOLVER AL INICIO
+        <button class="btn" onclick="showScreen('home')">
+            Volver al inicio
         </button>
 
     </div>
 
 </section>
 
-
-<!-- ================= EVENTOS ================= -->
-
+<!-- EVENTOS -->
 <section id="events" class="screen">
 
-    <div class="container">
+    <h2 class="section-title">Eventos 🚚</h2>
 
-        <button class="back"
-                onclick="showScreen('home')">
-            ← Volver
-        </button>
+    <div class="hero">
+        <h2>El Club va a tu fiesta</h2>
+        <p style="margin-top:10px;">
+            Reservá nuestro carrito para cumpleaños,
+            fiestas, reuniones y todo tipo de eventos.
+        </p>
+    </div>
 
-        <h2 class="section-title">
-            🚚 Llevamos el Club a tu fiesta
-        </h2>
+    <div class="card">
+        <h3>¿Cómo funciona?</h3>
 
-        <p style="line-height:1.5;color:#765f51;">
-            Reservá nuestro carrito para tu cumpleaños,
-            fiesta o evento.
+        <p style="margin-top:10px;line-height:1.6;">
+            1️⃣ Elegís la fecha.<br>
+            2️⃣ Elegís el horario.<br>
+            3️⃣ Completás los datos del evento.<br>
+            4️⃣ Elegís un combo.<br>
+            5️⃣ Confirmás la reserva.
         </p>
 
-        <div class="hero"
-             style="margin:20px 0 0;">
-
-            <div class="fake-hotdog">🚚🌭</div>
-
-            <h2>Vos ponés la fiesta.</h2>
-
-            <h2>Nosotros llevamos los panchos.</h2>
-
-        </div>
-
-        <button class="main-button"
-                onclick="showScreen('calendar')">
-            ELEGIR FECHA
+        <button class="btn dark" onclick="showScreen('calendar')">
+            Elegir fecha
         </button>
-
     </div>
+
 </section>
 
-
-<!-- ================= CALENDARIO ================= -->
-
+<!-- CALENDARIO -->
 <section id="calendar" class="screen">
 
-    <div class="container">
+    <h2 class="section-title">Elegí la fecha 📅</h2>
 
-        <button class="back"
-                onclick="showScreen('events')">
-            ← Volver
-        </button>
+    <div class="card">
 
-        <h2 class="section-title">
-            📅 Elegí la fecha
-        </h2>
+        <div class="calendar-header">
 
-        <div class="calendar">
+            <button onclick="changeMonth(-1)">‹</button>
 
-            <div class="calendar-header">
+            <div class="calendar-title" id="calendarTitle"></div>
 
-                <button onclick="changeMonth(-1)">
-                    ‹
-                </button>
-
-                <div class="calendar-title"
-                     id="calendarTitle">
-                </div>
-
-                <button onclick="changeMonth(1)">
-                    ›
-                </button>
-
-            </div>
-
-            <div class="weekdays">
-                <div>L</div>
-                <div>M</div>
-                <div>M</div>
-                <div>J</div>
-                <div>V</div>
-                <div>S</div>
-                <div>D</div>
-            </div>
-
-            <div class="days"
-                 id="calendarDays">
-            </div>
-
-            <div class="legend">
-
-                <span>
-                    <span class="dot green"></span>
-                    Disponible
-                </span>
-
-                <span>
-                    <span class="dot red"></span>
-                    Ocupado
-                </span>
-
-            </div>
+            <button onclick="changeMonth(1)">›</button>
 
         </div>
 
-        <div id="selectedDateBox"
-             style="margin-top:18px;display:none;">
+        <div class="weekdays">
+            <div>L</div>
+            <div>M</div>
+            <div>M</div>
+            <div>J</div>
+            <div>V</div>
+            <div>S</div>
+            <div>D</div>
+        </div>
 
-            <div class="home-card">
+        <div class="calendar" id="calendarDays"></div>
 
-                <h3>Fecha seleccionada</h3>
-
-                <p id="selectedDateText"></p>
-
-            </div>
-
-            <button class="main-button"
-                    onclick="showScreen('eventData')">
-                CONTINUAR
-            </button>
-
+        <div class="note" style="margin-top:15px;">
+            🔴 Fecha ocupada<br>
+            🟠 Fecha seleccionada
         </div>
 
     </div>
+
 </section>
 
-
-<!-- ================= DATOS EVENTO ================= -->
-
+<!-- DATOS EVENTO -->
 <section id="eventData" class="screen">
 
-    <div class="container">
+    <h2 class="section-title">Datos del evento</h2>
 
-        <button class="back"
-                onclick="showScreen('calendar')">
-            ← Volver
-        </button>
+    <div class="card">
 
-        <h2 class="section-title">
-            🎉 Tu evento
-        </h2>
+        <label>Fecha seleccionada</label>
+        <input type="text" id="selectedDate" readonly>
 
-        <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" id="eventName" placeholder="Nombre">
 
-            <label>Tipo de evento</label>
+        <label>Teléfono</label>
+        <input type="tel" id="eventPhone" placeholder="Teléfono">
 
-            <div class="choice-grid">
+        <label>Dirección del evento</label>
+        <input type="text" id="eventAddress" placeholder="Dirección">
 
-                <div class="choice"
-                     onclick="selectEvent(this)">
-                    🎂<br>Cumpleaños
-                </div>
+        <label>Tipo de evento</label>
+        <select id="eventType">
+            <option value="">Seleccionar</option>
+            <option>Cumpleaños</option>
+            <option>Fiesta</option>
+            <option>Reunión</option>
+            <option>Evento empresarial</option>
+            <option>Otro</option>
+        </select>
 
-                <div class="choice"
-                     onclick="selectEvent(this)">
-                    💍<br>Casamiento
-                </div>
+        <label>Cantidad aproximada de personas</label>
+        <input type="number" id="eventPeople" min="1" placeholder="Ej: 50">
 
-                <div class="choice"
-                     onclick="selectEvent(this)">
-                    🎓<br>Fiesta
-                </div>
-
-                <div class="choice"
-                     onclick="selectEvent(this)">
-                    🏢<br>Empresarial
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Cantidad de personas</label>
-
-            <input id="eventPeople"
-                   type="number"
-                   min="1"
-                   placeholder="Ej: 40">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Hora del evento</label>
-
-            <input id="eventTime"
-                   type="time">
-
-            <small style="display:block;margin-top:6px;color:#806b5d;">
-                Eventos disponibles durante todo el día.
-            </small>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Lugar del evento</label>
-
-            <input id="eventPlace"
-                   type="text"
-                   placeholder="Ej: Salón, casa, quinta...">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Dirección</label>
-
-            <input id="eventAddress"
-                   type="text"
-                   placeholder="Dirección del evento">
-
-        </div>
-
-
-        <button class="main-button"
-                onclick="showScreen('combos')">
-            ELEGIR COMBO
+        <button class="btn" onclick="showScreen('eventTime')">
+            Continuar
         </button>
 
     </div>
+
 </section>
 
+<!-- HORARIO EVENTO -->
+<section id="eventTime" class="screen">
 
-<!-- ================= COMBOS ================= -->
+    <h2 class="section-title">Horario del evento 🕐</h2>
 
+    <div class="card">
+
+        <label>Hora de inicio</label>
+        <input type="time" id="eventStart">
+
+        <label>Hora de finalización</label>
+        <input type="time" id="eventEnd">
+
+        <div class="note">
+            🕐 Para eventos podés elegir horario de mañana,
+            tarde o noche.
+        </div>
+
+        <button class="btn dark" onclick="showScreen('combos')">
+            Ver combos
+        </button>
+
+    </div>
+
+</section>
+
+<!-- COMBOS -->
 <section id="combos" class="screen">
 
-    <div class="container">
+    <h2 class="section-title">Elegí tu combo 🌭</h2>
 
-        <button class="back"
-                onclick="showScreen('eventData')">
-            ← Volver
-        </button>
-
-        <h2 class="section-title">
-            🌭 Elegí tu combo
-        </h2>
-
-        <div id="comboList">
-
-            <div class="product-card"
-                 onclick="selectCombo(1)">
-
-                <h3>Combo 1</h3>
-
-                <p class="product-description">
-                    Contenido a definir.
-                </p>
-
-                <div class="product-bottom">
-                    <span class="price">$ —</span>
-                    <button class="add-button">
-                        ELEGIR
-                    </button>
-                </div>
-
-            </div>
-
-
-            <div class="product-card"
-                 onclick="selectCombo(2)">
-
-                <h3>Combo 2</h3>
-
-                <p class="product-description">
-                    Contenido a definir.
-                </p>
-
-                <div class="product-bottom">
-                    <span class="price">$ —</span>
-                    <button class="add-button">
-                        ELEGIR
-                    </button>
-                </div>
-
-            </div>
-
-
-            <div class="product-card"
-                 onclick="selectCombo(3)">
-
-                <h3>Combo 3</h3>
-
-                <p class="product-description">
-                    Contenido a definir.
-                </p>
-
-                <div class="product-bottom">
-                    <span class="price">$ —</span>
-                    <button class="add-button">
-                        ELEGIR
-                    </button>
-                </div>
-
-            </div>
-
-
-            <div class="product-card"
-                 onclick="selectCombo(4)">
-
-                <h3>Combo 4</h3>
-
-                <p class="product-description">
-                    Contenido a definir.
-                </p>
-
-                <div class="product-bottom">
-                    <span class="price">$ —</span>
-                    <button class="add-button">
-                        ELEGIR
-                    </button>
-                </div>
-
-            </div>
-
-        </div>
-
+    <div class="card combo" onclick="selectCombo(this, 'Combo 1')">
+        <h3>Combo 1</h3>
+        <p style="margin-top:8px;">
+            Pancho + acompañamiento
+        </p>
+        <div class="price">$ —</div>
     </div>
+
+    <div class="card combo" onclick="selectCombo(this, 'Combo 2')">
+        <h3>Combo 2</h3>
+        <p style="margin-top:8px;">
+            Pancho + bebida
+        </p>
+        <div class="price">$ —</div>
+    </div>
+
+    <div class="card combo" onclick="selectCombo(this, 'Combo 3')">
+        <h3>Combo 3</h3>
+        <p style="margin-top:8px;">
+            Pancho + bebida + acompañamiento
+        </p>
+        <div class="price">$ —</div>
+    </div>
+
+    <div class="card combo" onclick="selectCombo(this, 'Combo 4')">
+        <h3>Combo 4</h3>
+        <p style="margin-top:8px;">
+            Combo especial para eventos
+        </p>
+        <div class="price">$ —</div>
+    </div>
+
+    <button class="btn dark" onclick="showReservation()">
+        Continuar
+    </button>
+
 </section>
 
-
-<!-- ================= RESERVA ================= -->
-
+<!-- RESERVA -->
 <section id="reservation" class="screen">
+
+    <h2 class="section-title">Resumen de reserva</h2>
+
+    <div class="card" id="reservationSummary"></div>
+
+    <button class="btn" onclick="confirmReservation()">
+        Confirmar reserva
+    </button>
+
+</section>
+
+<!-- RESERVA RECIBIDA -->
+<section id="reservationSuccess" class="screen">
 
     <div class="success">
 
-        <div class="success-icon">🚚🌭</div>
+        <div class="success-icon">🎉</div>
 
-        <h1>¡Reserva recibida!</h1>
+        <h2>¡Reserva recibida!</h2>
 
-        <p>
-            Recibimos tu solicitud de reserva.
+        <p style="margin-top:12px;">
+            Nos comunicaremos contigo para confirmar todos
+            los detalles del evento.
         </p>
 
-        <div class="status">
-            🟡 Pendiente de confirmación
-        </div>
-
-        <div class="home-card"
-             style="text-align:left;margin-top:25px;">
-
-            <h3>Tu evento</h3>
-
-            <p id="reservationSummary">
-            </p>
-
-        </div>
-
-        <button class="main-button"
-                onclick="showScreen('home')">
-            VOLVER AL INICIO
+        <button class="btn" onclick="showScreen('home')">
+            Volver al inicio
         </button>
 
     </div>
 
 </section>
 
-
-<!-- ================= MIS RESERVAS ================= -->
-
+<!-- PERFIL -->
 <section id="profile" class="screen">
 
-    <div class="container">
+    <h2 class="section-title">Mi cuenta 👤</h2>
 
-        <h2 class="section-title">
-            👤 Mi Club
-        </h2>
-
-        <div class="home-card">
-
-            <h3>🌭 Mis pedidos</h3>
-
-            <p>
-                Acá aparecerán tus pedidos.
-            </p>
-
-        </div>
-
-        <div class="home-card">
-
-            <h3>🚚 Mis reservas</h3>
-
-            <p>
-                Acá aparecerán tus eventos.
-            </p>
-
-        </div>
-
-        <div class="home-card">
-
-            <h3>💳 Medios de pago</h3>
-
-            <p>
-                Efectivo · Transferencia
-            </p>
-
-        </div>
-
-        <div class="home-card">
-
-            <h3>📱 Contacto</h3>
-
-            <p>
-                Instagram · WhatsApp
-            </p>
-
-        </div>
-
+    <div class="card">
+        <h3>Mis pedidos</h3>
+        <p style="margin-top:8px;">
+            Consultá tus pedidos realizados.
+        </p>
     </div>
+
+    <div class="card">
+        <h3>Mis reservas</h3>
+        <p style="margin-top:8px;">
+            Consultá las reservas de tus eventos.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>Medios de pago</h3>
+        <p style="margin-top:8px;">
+            💵 Efectivo<br>
+            🏦 Transferencia bancaria
+        </p>
+    </div>
+
 </section>
 
-
-<!-- ================= ADMIN ================= -->
-
+<!-- ADMIN -->
 <section id="admin" class="screen">
 
-    <div class="container">
+    <h2 class="section-title">Panel administrador ⚙️</h2>
 
-        <h2 class="section-title">
-            🔐 Administración
-        </h2>
-
-        <div class="admin-stat">
-
-            <div class="stat">
-                <strong>12</strong>
-                Pedidos
-            </div>
-
-            <div class="stat">
-                <strong>1</strong>
-                Evento
-            </div>
-
-            <div class="stat">
-                <strong>$ —</strong>
-                Ventas
-            </div>
-
-        </div>
-
-
-        <h3 style="margin-bottom:12px;">
-            🌭 Pedidos pendientes
-        </h3>
-
-        <div class="admin-card">
-
-            <h3>Pedido #024</h3>
-
-            <p>
-                8 productos · 21:30
-            </p>
-
-            <span class="status">
-                🟡 Preparando
-            </span>
-
-        </div>
-
-
-        <h3 style="margin:25px 0 12px;">
-            🚚 Próximos eventos
-        </h3>
-
-        <div class="admin-card">
-
-            <h3>20 de octubre</h3>
-
-            <p>
-                🎂 Cumpleaños · 40 personas
-            </p>
-
-            <p>
-                🕐 20:30
-            </p>
-
-            <span class="status">
-                🟢 Confirmado
-            </span>
-
-        </div>
-
-
-        <button class="secondary-button"
-                onclick="showScreen('calendar')">
-            📅 VER CALENDARIO
-        </button>
-
+    <div class="admin-box">
+        <div>Pedidos de hoy</div>
+        <div class="admin-number">0</div>
     </div>
+
+    <div class="admin-box">
+        <div>Reservas próximas</div>
+        <div class="admin-number">0</div>
+    </div>
+
+    <div class="card">
+        <h3>📅 Calendario de eventos</h3>
+        <button class="btn" onclick="showScreen('calendar')">
+            Ver calendario
+        </button>
+    </div>
+
+    <div class="card">
+        <h3>🌭 Productos</h3>
+        <p style="margin-top:8px;">
+            Desde acá se podrán administrar los productos,
+            precios y combos.
+        </p>
+    </div>
+
 </section>
 
-
-<!-- ================= NAV ================= -->
-
+<!-- NAVEGACIÓN -->
 <nav class="bottom-nav">
 
-    <button class="nav-button active"
-            onclick="showScreen('home')">
-
-        <span class="nav-icon">🏠</span>
+    <button class="nav-btn" onclick="showScreen('home')">
+        <span>🏠</span>
         Inicio
-
     </button>
 
-
-    <button class="nav-button"
-            onclick="showScreen('menu')">
-
-        <span class="nav-icon">🌭</span>
+    <button class="nav-btn" onclick="showScreen('menu')">
+        <span>🌭</span>
         Menú
-
     </button>
 
-
-    <button class="nav-button"
-            onclick="showScreen('events')">
-
-        <span class="nav-icon">🚚</span>
+    <button class="nav-btn" onclick="showScreen('events')">
+        <span>🚚</span>
         Eventos
-
     </button>
 
-
-    <button class="nav-button"
-            onclick="showScreen('cart')">
-
-        <span class="nav-icon">🛒</span>
+    <button class="nav-btn" onclick="showScreen('cart')">
+        <span>🛒</span>
         Carrito
-
     </button>
 
-
-    <button class="nav-button"
-            onclick="showScreen('profile')">
-
-        <span class="nav-icon">👤</span>
-        Mi Club
-
+    <button class="nav-btn" onclick="showScreen('profile')">
+        <span>👤</span>
+        Perfil
     </button>
 
 </nav>
 
 </div>
 
-
 <script>
 
-/* ================= VARIABLES ================= */
-
 let cart = [];
-
-let currentMonth = new Date().getMonth();
-let currentYear = new Date().getFullYear();
 
 let selectedDate = null;
 let selectedCombo = null;
 
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
 
-/*
-    FECHAS OCUPADAS
+/* FECHAS OCUPADAS */
 
-    Acá ustedes podrán agregar las fechas
-    que ya tengan reservadas.
-
-    Formato:
-    "2026-10-20"
-*/
-
-let occupiedDates = [
+const occupiedDates = [
     "2026-10-20"
 ];
 
 
-/* ================= NAVEGACIÓN ================= */
+/* CAMBIAR PANTALLA */
 
 function showScreen(id) {
 
-    document.querySelectorAll(".screen")
-        .forEach(screen => {
-            screen.classList.remove("active");
-        });
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
 
     const screen = document.getElementById(id);
 
@@ -1501,111 +868,78 @@ function showScreen(id) {
 }
 
 
-/* ================= CARRITO ================= */
+/* CARRITO */
 
 function addToCart(product) {
 
-    const existing = cart.find(
-        item => item.name === product
-    );
+    const existing = cart.find(item => item.name === product);
 
     if (existing) {
-        existing.quantity++;
+        existing.qty++;
     } else {
         cart.push({
             name: product,
-            quantity: 1
+            qty: 1
         });
     }
 
     updateCart();
 
-    alert(product + " agregado al carrito 🌭");
+    showScreen("cart");
 }
 
 
 function updateCart() {
 
-    const count = cart.reduce(
-        (total, item) => total + item.quantity,
-        0
-    );
-
-    document.getElementById("cartCount")
-        .textContent = count;
-
-    renderCart();
-}
-
-
-function renderCart() {
-
-    const container =
-        document.getElementById("cartItems");
-
-    const empty =
-        document.getElementById("emptyCart");
-
-    const total =
-        document.getElementById("cartTotal");
+    const container = document.getElementById("cartItems");
 
     if (cart.length === 0) {
 
-        container.innerHTML = "";
-
-        empty.style.display = "block";
-        total.style.display = "none";
+        container.innerHTML = `
+            <p>Tu carrito está vacío.</p>
+        `;
 
         return;
     }
 
-    empty.style.display = "none";
-    total.style.display = "block";
+    container.innerHTML = "";
 
-    container.innerHTML = cart.map(
-        (item, index) => `
+    cart.forEach((item, index) => {
 
-        <div class="cart-item">
+        container.innerHTML += `
+            <div class="cart-row">
 
-            <div>
-                <strong>${item.name}</strong>
+                <div>
+                    <strong>${item.name}</strong>
+                </div>
 
-                <p style="
-                    color:#806b5d;
-                    font-size:12px;
-                    margin-top:4px;
-                ">
-                    Precio: $ —
-                </p>
-            </div>
+                <div class="qty">
 
-            <div class="quantity">
+                    <button onclick="changeQty(${index}, -1)">
+                        −
+                    </button>
 
-                <button onclick="changeQuantity(${index}, -1)">
-                    −
-                </button>
+                    <span>${item.qty}</span>
 
-                <strong>
-                    ${item.quantity}
-                </strong>
+                    <button onclick="changeQty(${index}, 1)">
+                        +
+                    </button>
 
-                <button onclick="changeQuantity(${index}, 1)">
-                    +
-                </button>
+                </div>
 
             </div>
+        `;
 
-        </div>
-    `
-    ).join("");
+    });
+
 }
 
 
-function changeQuantity(index, amount) {
+function changeQty(index, amount) {
 
-    cart[index].quantity += amount;
+    cart[index].qty += amount;
 
-    if (cart[index].quantity <= 0) {
+    if (cart[index].qty <= 0) {
         cart.splice(index, 1);
     }
 
@@ -1613,24 +947,18 @@ function changeQuantity(index, amount) {
 }
 
 
-/* ================= PEDIDO ================= */
+/* PEDIDO */
 
 function confirmOrder() {
 
-    const name =
-        document.getElementById("orderName").value;
+    const name = document.getElementById("orderName").value;
+    const phone = document.getElementById("orderPhone").value;
+    const time = document.getElementById("pickupTime").value;
+    const payment = document.getElementById("payment").value;
 
-    const date =
-        document.getElementById("pickupDate").value;
+    if (!name || !phone || !time || !payment) {
 
-    const time =
-        document.getElementById("pickupTime").value;
-
-    if (!name || !date || !time) {
-
-        alert(
-            "Completá tu nombre, fecha y hora."
-        );
+        alert("Completá todos los datos antes de continuar.");
 
         return;
     }
@@ -1639,17 +967,16 @@ function confirmOrder() {
 }
 
 
-/* ================= CALENDARIO ================= */
+/* CALENDARIO */
 
 function renderCalendar() {
 
-    const title =
-        document.getElementById("calendarTitle");
+    const calendar = document.getElementById("calendarDays");
+    const title = document.getElementById("calendarTitle");
 
-    const daysContainer =
-        document.getElementById("calendarDays");
+    calendar.innerHTML = "";
 
-    const monthNames = [
+    const months = [
         "Enero",
         "Febrero",
         "Marzo",
@@ -1665,86 +992,67 @@ function renderCalendar() {
     ];
 
     title.textContent =
-        monthNames[currentMonth]
-        + " "
-        + currentYear;
-
+        months[currentMonth] + " " + currentYear;
 
     const firstDay =
-        new Date(
-            currentYear,
-            currentMonth,
-            1
-        ).getDay();
-
+        new Date(currentYear, currentMonth, 1).getDay();
 
     const daysInMonth =
-        new Date(
-            currentYear,
-            currentMonth + 1,
-            0
-        ).getDate();
+        new Date(currentYear, currentMonth + 1, 0).getDate();
 
+    let startDay = firstDay === 0 ? 6 : firstDay - 1;
 
-    /*
-        JavaScript empieza la semana
-        en domingo. Lo convertimos para
-        que empiece en lunes.
-    */
+    for (let i = 0; i < startDay; i++) {
 
-    let startingDay = firstDay - 1;
+        const empty = document.createElement("div");
 
-    if (startingDay < 0) {
-        startingDay = 6;
+        empty.className = "day empty";
+
+        calendar.appendChild(empty);
     }
-
-
-    let html = "";
-
-    for (let i = 0; i < startingDay; i++) {
-        html += "<div></div>";
-    }
-
 
     for (let day = 1; day <= daysInMonth; day++) {
 
-        const month =
-            String(currentMonth + 1).padStart(2, "0");
+        const button = document.createElement("button");
 
-        const dayFormatted =
-            String(day).padStart(2, "0");
+        button.className = "day";
+
+        button.textContent = day;
 
         const dateString =
-            `${currentYear}-${month}-${dayFormatted}`;
+            currentYear + "-" +
+            String(currentMonth + 1).padStart(2, "0") + "-" +
+            String(day).padStart(2, "0");
 
+        if (occupiedDates.includes(dateString)) {
 
-        const occupied =
-            occupiedDates.includes(dateString);
+            button.classList.add("occupied");
 
-
-        if (occupied) {
-
-            html += `
-                <div class="day occupied">
-                    ${day}
-                </div>
-            `;
+            button.disabled = true;
 
         } else {
 
-            html += `
-                <div
-                    class="day available"
-                    onclick="selectDate('${dateString}')"
-                >
-                    ${day}
-                </div>
-            `;
+            button.onclick = function() {
+
+                selectedDate = dateString;
+
+                document
+                    .querySelectorAll(".day.selected")
+                    .forEach(d => d.classList.remove("selected"));
+
+                button.classList.add("selected");
+
+                document.getElementById("selectedDate").value =
+                    formatDate(dateString);
+
+                showScreen("eventData");
+
+            };
+
         }
+
+        calendar.appendChild(button);
     }
-
-
-    daysContainer.innerHTML = html;
 }
 
 
@@ -1770,126 +1078,130 @@ function changeMonth(amount) {
 }
 
 
-function selectDate(date) {
+function formatDate(date) {
 
-    selectedDate = date;
+    const parts = date.split("-");
 
-    const box =
-        document.getElementById(
-            "selectedDateBox"
-        );
-
-    const text =
-        document.getElementById(
-            "selectedDateText"
-        );
-
-
-    const dateObject =
-        new Date(date + "T12:00:00");
-
-
-    text.textContent =
-        dateObject.toLocaleDateString(
-            "es-UY",
-            {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            }
-        );
-
-
-    box.style.display = "block";
+    return parts[2] + "/" + parts[1] + "/" + parts[0];
 }
 
 
-/* ================= EVENTOS ================= */
+/* COMBOS */
 
-function startEventReservation() {
-
-    showScreen("events");
-
-}
-
-
-function selectEvent(element) {
+function selectCombo(element, combo) {
 
     document
-        .querySelectorAll("#eventData .choice")
-        .forEach(choice => {
-            choice.classList.remove("selected");
-        });
+        .querySelectorAll(".combo")
+        .forEach(c => c.classList.remove("selected"));
 
     element.classList.add("selected");
+
+    selectedCombo = combo;
 }
 
 
-function selectChoice(element) {
+function showReservation() {
 
-    element.parentElement
-        .querySelectorAll(".choice")
-        .forEach(choice => {
-            choice.classList.remove("selected");
-        });
+    if (!selectedCombo) {
 
-    element.classList.add("selected");
-}
+        alert("Elegí un combo primero.");
 
+        return;
+    }
 
-function selectCombo(number) {
+    const name =
+        document.getElementById("eventName").value;
 
-    selectedCombo = number;
+    const phone =
+        document.getElementById("eventPhone").value;
+
+    const address =
+        document.getElementById("eventAddress").value;
+
+    const type =
+        document.getElementById("eventType").value;
 
     const people =
-        document.getElementById(
-            "eventPeople"
-        ).value || "—";
+        document.getElementById("eventPeople").value;
+
+    const start =
+        document.getElementById("eventStart").value;
+
+    const end =
+        document.getElementById("eventEnd").value;
 
 
-    document.getElementById(
-        "reservationSummary"
-    ).innerHTML = `
+    if (
+        !name ||
+        !phone ||
+        !address ||
+        !type ||
+        !people ||
+        !start ||
+        !end
+    ) {
 
-        📅 <strong>${formatDate(selectedDate)}</strong><br><br>
+        alert("Completá todos los datos del evento.");
 
-        👥 <strong>${people}</strong> personas<br><br>
+        showScreen("eventData");
 
-        🌭 <strong>Combo ${number}</strong><br><br>
+        return;
+    }
 
-        💰 Total: <strong>$ —</strong><br><br>
 
-        🟡 Pendiente de confirmación
+    document.getElementById("reservationSummary").innerHTML = `
+
+        <h3>📅 Fecha</h3>
+        <p style="margin:8px 0 15px;">
+            ${formatDate(selectedDate)}
+        </p>
+
+        <h3>🕐 Horario</h3>
+        <p style="margin:8px 0 15px;">
+            ${start} a ${end}
+        </p>
+
+        <h3>👤 Cliente</h3>
+        <p style="margin:8px 0 15px;">
+            ${name}
+        </p>
+
+        <h3>📍 Dirección</h3>
+        <p style="margin:8px 0 15px;">
+            ${address}
+        </p>
+
+        <h3>🎉 Evento</h3>
+        <p style="margin:8px 0 15px;">
+            ${type}
+        </p>
+
+        <h3>👥 Personas</h3>
+        <p style="margin:8px 0 15px;">
+            ${people}
+        </p>
+
+        <h3>🌭 Combo</h3>
+        <p style="margin-top:8px;">
+            ${selectedCombo}
+        </p>
 
     `;
-
 
     showScreen("reservation");
 }
 
 
-function formatDate(date) {
+function confirmReservation() {
 
-    if (!date) return "No seleccionada";
-
-    const object =
-        new Date(date + "T12:00:00");
-
-    return object.toLocaleDateString(
-        "es-UY",
-        {
-            day: "numeric",
-            month: "long",
-            year: "numeric"
-        }
-    );
+    showScreen("reservationSuccess");
 }
 
 
-/* ================= INICIALIZAR ================= */
+/* INICIAR */
 
 renderCalendar();
+
 updateCart();
 
 </script>

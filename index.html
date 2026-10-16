@@ -3,1770 +3,1841 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Club de los Panchos</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--brown:#4a2b1b;--brown2:#3b2417;--orange:#f29b27;--cream:#fff8ec;--muted:#765f51;--line:#eadbd0}
-body{font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--brown2)}
-button{border:0;cursor:pointer;font-family:inherit}
-button:disabled{opacity:.5;cursor:not-allowed}
-.app{max-width:480px;margin:auto;min-height:100vh;background:var(--cream)}
-.header{background:var(--brown);color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20;min-height:68px}
-.logo img{width:150px;max-width:100%;height:auto;display:block}
-.logo-fallback{font-weight:900;font-size:19px;line-height:1.05}.logo-fallback span{color:#ffb52e}
-.cart-icon{background:#ffb52e;color:var(--brown2);border-radius:50%;width:42px;height:42px;font-size:19px;position:relative}
-.cart-count{position:absolute;right:-3px;top:-4px;background:#e65325;color:#fff;border-radius:50%;width:19px;height:19px;font-size:11px;display:flex;justify-content:center;align-items:center}
-.screen{display:none;padding-bottom:90px}.screen.active{display:block}.container{padding:20px}
-.hero{background:var(--orange);margin:18px;border-radius:25px;padding:27px 22px;color:var(--brown2)}
-.hero h1{font-size:38px;line-height:.98;font-weight:900;text-transform:uppercase}.hero p{margin-top:15px;font-size:15px;line-height:1.45}
-.fake-hotdog{font-size:76px;text-align:center;margin:8px 0 16px}
-.main-button,.secondary-button{width:100%;padding:14px;border-radius:13px;font-weight:bold;font-size:15px;margin-top:10px}
-.main-button{background:var(--brown);color:white}.secondary-button{background:white;color:var(--brown);border:2px solid var(--brown)}
-.section-title{font-size:26px;font-weight:900;margin-bottom:15px;line-height:1.1}
-.home-card,.product-card,.admin-card,.reward-card{background:#fff;border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 3px 10px #3b241714}
-.home-card h3,.product-card h3,.admin-card h3{font-size:20px;margin-bottom:7px}.home-card p,.product-description,.muted{color:var(--muted);font-size:14px;line-height:1.45}
-.home-card[onclick]{cursor:pointer}
-.product-image{background:#ffe0a3;border-radius:16px;height:115px;display:flex;align-items:center;justify-content:center;font-size:65px;margin-bottom:13px}
-.product-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}.price{font-weight:900;font-size:18px}.add-button{background:var(--orange);padding:11px 14px;border-radius:11px;font-weight:bold;color:var(--brown2)}
-.cart-item{background:#fff;padding:15px;border-radius:15px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.quantity{display:flex;align-items:center;gap:9px}.quantity button{width:28px;height:28px;border-radius:50%;background:var(--orange);font-weight:bold}
-.total-box{background:var(--brown);color:white;border-radius:18px;padding:18px;margin-top:18px}.total-row{display:flex;justify-content:space-between;font-size:18px}
-.calendar{background:#fff;border-radius:20px;padding:18px;box-shadow:0 3px 10px #3b241714}.calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.calendar-header button{background:var(--orange);border-radius:9px;width:35px;height:35px}.calendar-title{font-size:18px;font-weight:900}
-.weekdays,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.weekdays div{text-align:center;font-size:11px;font-weight:bold;color:#8b7465;padding-bottom:8px}.day{height:39px;display:flex;align-items:center;justify-content:center;border-radius:10px;font-weight:bold;font-size:13px}.day.available{background:#fff2d5;cursor:pointer}.day.available:hover{background:var(--orange)}.day.occupied{background:#e5dcd6;color:#9b8d84;text-decoration:line-through}.day.selected{background:var(--brown);color:white}
-.legend{display:flex;gap:15px;font-size:11px;margin-top:15px}.legend span{display:flex;align-items:center;gap:5px}.dot{width:10px;height:10px;border-radius:50%;background:var(--orange)}
-.form-group{margin-bottom:16px}.form-group label{display:block;font-weight:bold;margin-bottom:7px;font-size:14px}
-input,select,textarea{width:100%;padding:13px;border-radius:11px;border:1px solid #d6c5b7;background:white;font-family:inherit;font-size:15px;color:var(--brown2)}textarea{min-height:90px}
-.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;text-align:center;cursor:pointer}.choice.selected{border-color:var(--orange);background:#fff0cd}
-.success{text-align:center;padding:40px 20px}.success-icon{font-size:70px;margin-bottom:18px}.success h1{font-size:28px;margin-bottom:10px}.status{display:inline-block;padding:7px 12px;border-radius:20px;background:#fff0c9;font-size:12px;font-weight:bold;margin-top:10px}
-.admin-stat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}.stat{background:var(--orange);border-radius:14px;padding:13px 6px;text-align:center;font-size:12px}.stat strong{display:block;font-size:21px;margin-bottom:3px}
-.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;height:70px;background:white;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:30}.nav-button{background:white;color:#806b5d;font-size:11px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px}.nav-button.active{color:#e87920;font-weight:bold}.nav-icon{font-size:21px}
-.back{display:inline-flex;align-items:center;gap:6px;background:transparent;font-weight:bold;margin-bottom:18px;color:var(--brown)}
-.points-number{font-size:40px;font-weight:900;color:var(--brown);line-height:1.15}.progress-track{height:12px;background:#eadbd0;border-radius:99px;overflow:hidden;margin:12px 0}.progress-fill{height:100%;width:0;background:var(--orange);transition:width .2s}
-.reward-card{border:1px solid #f1dfc9}.reward-icon{font-size:38px;margin-bottom:8px}.reward-card h3{font-size:18px;margin-bottom:6px}.points-pill{display:inline-block;background:#fff0cd;padding:6px 10px;border-radius:99px;font-size:12px;font-weight:bold;margin:9px 0}
-.history-item{padding:12px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;font-size:13px}.history-item:last-child{border-bottom:0}.positive{color:#237342;font-weight:bold}.negative{color:#b33a25;font-weight:bold}
-.notice{background:#fff0cd;border:1px solid #f1d08e;border-radius:12px;padding:12px;font-size:12px;line-height:1.45;margin:12px 0;color:#65421d}
-.small{font-size:12px;color:var(--muted);line-height:1.45}.inline-button{background:transparent;color:#8a4219;text-decoration:underline;font-weight:bold;padding:5px}
-@media(min-width:481px){body{padding-bottom:0}.app{box-shadow:0 0 30px #3b241710}}
-</style>
-</head>
-<body>
-<div class="app">
-<header class="header">
-  <div class="logo"><img src="logopanchos.jpg.JPG" alt="El Club de los Panchos" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="logo-fallback" style="display:none">EL CLUB<br><span>DE LOS PANCHOS</span></div></div>
-  <button class="cart-icon" onclick="showScreen('cart')" aria-label="Abrir carrito">ð<span class="cart-count" id="cartCount">0</span></button>
-</header>
-
-<section id="home" class="screen active">
-  <div class="hero"><div class="fake-hotdog">ð­</div><h1>El Club<br>de los<br>Panchos</h1><p>Panchos, eventos y un carrito que llega directo a tu fiesta.</p><button class="main-button" onclick="showScreen('menu')">PEDIR AHORA</button><button class="secondary-button" onclick="startEventReservation()">RESERVAR PARA UN EVENTO</button></div>
-  <div class="container">
-    <h2 class="section-title">Â¿QuÃ© estÃ¡s buscando?</h2>
-    <div class="home-card" onclick="showScreen('menu')"><h3>ð­ PedÃ­ para retirar</h3><p>ElegÃ­ tu pancho, hacÃ© tu pedido y pasÃ¡ a retirarlo por el local.</p></div>
-    <div class="home-card" onclick="startEventReservation()"><h3>ð Llevamos el Club a tu fiesta</h3><p>ReservÃ¡ nuestro carrito para cumpleaÃ±os, fiestas y eventos.</p></div>
-    <div class="home-card"><h3>ð Nuestro local</h3><p>AtenciÃ³n en el local durante la noche.</p><p style="margin-top:8px">Efectivo Â· Transferencia</p></div>
-    <div class="home-card"><h3>Nuestra misiÃ³n</h3><p>Somos el primer local de la ciudad dedicado a la venta exclusiva de panchos. Ofrecemos una experiencia gastronÃ³mica innovadora, Ãºnica y de alta calidad tanto en nuestro local fÃ­sico como en eventos. Nos caracterizamos por una atenciÃ³n Ã¡gil, amigable y accesible orientada a superar las expectativas de nuestros clientes y manteniÃ©ndonos responsables con el medio ambiente.</p></div>
-    <div class="home-card"><h3>Nuestra visiÃ³n</h3><p>Ser una empresa lÃ­der y referente de comida rÃ¡pida de la ciudad y el paÃ­s, expandiÃ©ndonos a travÃ©s de nuevos locales y eventos, siendo reconocidos por nuestra innovaciÃ³n constante, la confianza de nuestros clientes y un modelo de negocio sostenible.</p></div>
-    <div class="notice"><strong>DemostraciÃ³n local:</strong> las cuentas y los datos se guardan solo en este navegador. No se sincronizan entre dispositivos y el acceso con cÃ©dula no verifica la identidad. No usar para gestionar clientes reales.</div>
-  </div>
-</section>
-
-<section id="menu" class="screen"><div class="container">
-  <h2 class="section-title">ð­ El menÃº</h2>
-  <div class="product-card"><div class="product-image">ð­</div><h3>Pancho Normal</h3><p class="product-description">El clÃ¡sico del Club.</p><div class="product-bottom"><span class="price">Precio a definir</span><button class="add-button" onclick="addToCart('Pancho Normal')">+ AGREGAR</button></div></div>
-  <div class="product-card"><div class="product-image">ð­</div><h3>Pancho Extra Largo</h3><p class="product-description">MÃ¡s largo. MÃ¡s pancho.</p><div class="product-bottom"><span class="price">Precio a definir</span><button class="add-button" onclick="addToCart('Pancho Extra Largo')">+ AGREGAR</button></div></div>
-  <h2 class="section-title" style="margin-top:25px">ð Combos</h2>
-  <div class="product-card"><h3>Combo 1</h3><p class="product-description">Contenido a definir.</p><div class="product-bottom"><span class="price">Precio a definir</span><button class="add-button" onclick="addToCart('Combo 1')">+ AGREGAR</button></div></div>
-  <div class="product-card"><h3>Combo 2</h3><p class="product-description">Contenido a definir.</p><div class="product-bottom"><span class="price">Precio a definir</span><button class="add-button" onclick="addToCart('Combo 2')">+ AGREGAR</button></div></div>
-  <div class="product-card"><h3>Combo 3</h3><p class="product-description">Contenido a definir.</p><div class="product-bottom"><span class="price">Precio a definir</span><button class="add-button" onclick="addToCart('Combo 3')">+ AGREGAR</button></div></div>
-  <div class="product-card"><h3>Combo 4</h3><p class="product-description">Contenido a definir.</p><div class="product-bottom"><span class="price">Precio a definir</span><button class="add-button" onclick="addToCart('Combo 4')">+ AGREGAR</button></div></div>
-</div></section>
-
-<section id="cart" class="screen"><div class="container"><h2 class="section-title">ð Tu pedido</h2><div id="cartItems"></div><div id="emptyCart" style="text-align:center;padding:35px 10px"><div style="font-size:58px">ð­</div><h3>Tu carrito estÃ¡ vacÃ­o</h3><p class="muted" style="margin-top:8px">AgregÃ¡ algo rico del menÃº.</p><button class="main-button" onclick="showScreen('menu')">VER MENÃ</button></div><div id="cartTotal" class="total-box" style="display:none"><p>Los precios todavÃ­a no estÃ¡n definidos, por eso este pedido es una solicitud y no se calcula un total ni se acreditan puntos automÃ¡ticamente.</p><button class="main-button" style="background:var(--orange);color:var(--brown2)" onclick="showScreen('orderData')">CONTINUAR</button></div></div></section>
-
-<section id="orderData" class="screen"><div class="container"><button class="back" onclick="showScreen('cart')">â Volver</button><h2 class="section-title">Casi estÃ¡</h2>
-  <div class="form-group"><label for="orderName">Nombre</label><input id="orderName" type="text" placeholder="Tu nombre" required></div>
-  <div class="form-group"><label for="orderPhone">TelÃ©fono</label><input id="orderPhone" type="tel" placeholder="Tu telÃ©fono" required></div>
-  <div class="form-group"><label for="pickupDate">Fecha de retiro</label><input id="pickupDate" type="date" required></div>
-  <div class="form-group"><label for="pickupTime">Hora de retiro</label><input id="pickupTime" type="time" required></div>
-  <div class="form-group"><label>Forma de pago preferida</label><div class="choice-grid"><div class="choice" onclick="selectChoice(this)">Efectivo</div><div class="choice" onclick="selectChoice(this)">Transferencia</div></div></div>
-  <button class="main-button" onclick="confirmOrder()">ENVIAR SOLICITUD DE PEDIDO</button><p class="small" style="margin-top:10px">El pedido queda pendiente de confirmaciÃ³n. No se otorgan puntos hasta que la compra estÃ© pagada y sea registrada en administraciÃ³n.</p>
-</div></section>
-<section id="orderSuccess" class="screen"><div class="success"><div class="success-icon">ð­</div><h1>Â¡Solicitud recibida!</h1><p>Tu pedido quedÃ³ registrado como pendiente.</p><div class="status" id="orderSuccessStatus">Pendiente de confirmaciÃ³n</div><button class="main-button" onclick="showScreen('profile')">IR A MI CLUB</button><button class="secondary-button" onclick="showScreen('home')">VOLVER AL INICIO</button></div></section>
-
-<section id="events" class="screen"><div class="container"><button class="back" onclick="showScreen('home')">â Volver</button><h2 class="section-title">ð Llevamos el Club a tu fiesta</h2><p class="muted">ReservÃ¡ nuestro carrito para tu cumpleaÃ±os, fiesta o evento.</p><div class="hero" style="margin:20px 0 0"><div class="fake-hotdog">ðð­</div><h2>Vos ponÃ©s la fiesta.</h2><h2>Nosotros llevamos los panchos.</h2></div><button class="main-button" onclick="showScreen('calendar')">ELEGIR FECHA</button></div></section>
-<section id="calendar" class="screen"><div class="container"><button class="back" onclick="showScreen('events')">â Volver</button><h2 class="section-title">ElegÃ­ la fecha</h2><div class="calendar"><div class="calendar-header"><button onclick="changeMonth(-1)">â¹</button><div class="calendar-title" id="calendarTitle"></div><button onclick="changeMonth(1)">âº</button></div><div class="weekdays"><div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div><div>D</div></div><div class="days" id="calendarDays"></div><div class="legend"><span><span class="dot"></span>Disponible</span><span><span class="dot" style="background:#aaa"></span>Ocupado</span></div></div><div id="selectedDateBox" style="margin-top:18px;display:none"><div class="home-card"><h3>Fecha seleccionada</h3><p id="selectedDateText"></p></div><button class="main-button" onclick="showScreen('eventData')">CONTINUAR</button></div></div></section>
-<section id="eventData" class="screen"><div class="container"><button class="back" onclick="showScreen('calendar')">â Volver</button><h2 class="section-title">Tu evento</h2><div class="form-group"><label>Tipo de evento</label><div class="choice-grid"><div class="choice" onclick="selectEvent(this)">CumpleaÃ±os</div><div class="choice" onclick="selectEvent(this)">Casamiento</div><div class="choice" onclick="selectEvent(this)">Fiesta</div><div class="choice" onclick="selectEvent(this)">Empresarial</div></div></div><div class="form-group"><label for="eventPeople">Cantidad de personas</label><input id="eventPeople" type="number" min="1" placeholder="Ej.: 40"></div><div class="form-group"><label for="eventTime">Hora del evento</label><input id="eventTime" type="time"></div><div class="form-group"><label for="eventPlace">Lugar del evento</label><input id="eventPlace" type="text" placeholder="SalÃ³n, casa, quinta..."></div><div class="form-group"><label for="eventAddress">DirecciÃ³n</label><input id="eventAddress" type="text" placeholder="DirecciÃ³n del evento"></div><div class="form-group"><label for="eventContactName">Nombre de contacto</label><input id="eventContactName" type="text" placeholder="Tu nombre"></div><div class="form-group"><label for="eventContactPhone">TelÃ©fono de contacto</label><input id="eventContactPhone" type="tel" placeholder="Tu telÃ©fono"></div><button class="main-button" onclick="showScreen('combos')">ELEGIR COMBO</button></div></section>
-<section id="combos" class="screen"><div class="container"><button class="back" onclick="showScreen('eventData')">â Volver</button><h2 class="section-title">ElegÃ­ tu combo</h2><div id="comboList"></div></div></section>
-<section id="reservation" class="screen"><div class="success"><div class="success-icon">ðð­</div><h1>Â¡Reserva recibida!</h1><p>La solicitud quedÃ³ pendiente de confirmaciÃ³n.</p><div class="status">Pendiente de confirmaciÃ³n</div><div class="home-card" style="text-align:left;margin-top:22px"><h3>Tu evento</h3><p id="reservationSummary"></p></div><button class="main-button" onclick="showScreen('profile')">VER MIS RESERVAS</button><button class="secondary-button" onclick="showScreen('home')">VOLVER AL INICIO</button></div></section>
-
-<section id="profile" class="screen"><div class="container"><h2 class="section-title">Mi Club</h2><div id="profileLoggedOut"><div class="home-card"><h3>Tu cuenta del Club</h3><p>Registrate o ingresÃ¡ con tu cÃ©dula para consultar tus puntos, recompensas, pedidos y reservas.</p><button class="main-button" onclick="showScreen('register')">CREAR MI CUENTA</button><button class="secondary-button" onclick="showScreen('login')">ENTRAR CON CÃDULA</button></div></div>
-<div id="profileLoggedIn" style="display:none"><div class="home-card"><p class="muted">Hola,</p><h2 id="profileName" style="font-size:25px;margin:5px 0 14px"></h2><p class="muted">Tus Puntos del Club</p><div class="points-number" id="profilePoints">0</div><p class="small">Cada $10 uruguayos de compra pagada y registrada equivalen a 1 punto. Se toma la parte entera del importe dividido entre 10.</p><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><p class="small" id="progressText"></p><button class="main-button" onclick="showScreen('rewards')">VER RECOMPENSAS</button></div>
-<div class="home-card"><h3>Historial de puntos</h3><div id="pointsHistory"></div></div>
-<div class="home-card"><h3>Mis pedidos</h3><div id="myOrders"></div></div>
-<div class="home-card"><h3>Mis reservas</h3><div id="myReservations"></div></div>
-<button class="secondary-button" onclick="logout()">CERRAR SESIÃN</button></div>
-<div class="notice">DemostraciÃ³n local: los datos permanecen en este navegador. El acceso por cÃ©dula no verifica identidad y no es seguro para cuentas reales.</div>
-</div></section>
-
-<section id="register" class="screen"><div class="container"><button class="back" onclick="showScreen('profile')">â Volver a Mi Club</button><h2 class="section-title">Crear mi cuenta</h2><p class="muted" style="margin-bottom:18px">CompletÃ¡ los datos para crear tu perfil del Club.</p><form id="registerForm" onsubmit="registerClient(event)"><div class="form-group"><label for="regName">Nombre y apellido *</label><input id="regName" type="text" autocomplete="name" required maxlength="100"></div><div class="form-group"><label for="regCi">CÃ©dula de identidad *</label><input id="regCi" type="text" inputmode="numeric" placeholder="Sin puntos ni guion" required maxlength="20"></div><div class="form-group"><label for="regPhone">NÃºmero de telÃ©fono *</label><input id="regPhone" type="tel" autocomplete="tel" required maxlength="30"></div><button class="main-button" type="submit">CREAR CUENTA</button></form><p class="small" style="margin-top:12px">No se solicita contraseÃ±a ni correo electrÃ³nico. Esta modalidad es solo demostrativa.</p><button class="secondary-button" onclick="showScreen('login')">YA TENGO CUENTA</button></div></section>
-
-<section id="login" class="screen"><div class="container"><button class="back" onclick="showScreen('profile')">â Volver a Mi Club</button><h2 class="section-title">Entrar con cÃ©dula</h2><p class="muted" style="margin-bottom:18px">IngresÃ¡ la cÃ©dula usada al registrarte.</p><form onsubmit="loginClient(event)"><div class="form-group"><label for="loginCi">CÃ©dula de identidad</label><input id="loginCi" type="text" inputmode="numeric" placeholder="Tu cÃ©dula" required maxlength="20"></div><button class="main-button" type="submit">ENTRAR</button></form><button class="secondary-button" onclick="showScreen('register')">CREAR MI CUENTA</button><div class="notice">Este inicio de sesiÃ³n no confirma que seas el titular de la cÃ©dula. No usar para informaciÃ³n real o sensible.</div></div></section>
-
-<section id="rewards" class="screen"><div class="container"><button class="back" onclick="showScreen('profile')">â Volver a Mi Club</button><h2 class="section-title">Recompensas del Club</h2><p class="muted" style="margin-bottom:15px">CanjeÃ¡ tus puntos por premios. La entrega queda pendiente de validaciÃ³n por parte del local.</p><div id="rewardsList"></div></div></section>
-
-<section id="admin" class="screen"><div class="container"><h2 class="section-title">AdministraciÃ³n demostrativa</h2><div class="notice"><strong>Importante:</strong> este panel no tiene autenticaciÃ³n ni controles de seguridad. Cualquier persona que abra el archivo puede usarlo. No es apto para un negocio real.</div><div class="admin-stat"><div class="stat"><strong id="adminClients">0</strong>Clientes</div><div class="stat"><strong id="adminOrders">0</strong>Pedidos</div><div class="stat"><strong id="adminSales">$0</strong>Ventas registradas</div></div><div class="admin-card"><h3>Registrar compra pagada</h3><p class="muted" style="margin-bottom:14px">Solo registrar una compra efectivamente pagada. No usar para pedidos pendientes ni reservas.</p><form onsubmit="registerPurchase(event)"><div class="form-group"><label for="adminCi">CÃ©dula del cliente</label><input id="adminCi" type="text" inputmode="numeric" required placeholder="CÃ©dula registrada"></div><div class="form-group"><label for="adminAmount">Importe pagado (pesos uruguayos)</label><input id="adminAmount" type="number" min="1" step="1" required placeholder="Ej.: 350"></div><button class="main-button" type="submit">REGISTRAR COMPRA Y PUNTOS</button></form><div id="adminResult" class="small" style="margin-top:12px"></div></div><div class="admin-card"><h3>Ãltimas compras registradas</h3><div id="adminPurchaseHistory"></div></div><div class="admin-card"><h3>Solicitudes de pedidos</h3><div id="adminOrderList"></div></div><div class="admin-card"><h3>Reservas de eventos</h3><div id="adminReservationList"></div></div><button class="secondary-button" onclick="showScreen('calendar')">VER CALENDARIO DE EVENTOS</button></div></section>
-
-<nav class="bottom-nav">
-<button class="nav-button active" data-screen="home" onclick="showScreen('home')"><span class="nav-icon">ð </span>Inicio</button>
-<button class="nav-button" data-screen="menu" onclick="showScreen('menu')"><span class="nav-icon">ð­</span>MenÃº</button>
-<button class="nav-button" data-screen="events" onclick="showScreen('events')"><span class="nav-icon">ð</span>Eventos</button>
-<button class="nav-button" data-screen="cart" onclick="showScreen('cart')"><span class="nav-icon">ð</span>Carrito</button>
-<button class="nav-button" data-screen="profile" onclick="showScreen('profile')"><span class="nav-icon">ð¤</span>Mi Club</button>
-</nav>
-</div>
-
-<script>
-"use strict";
-const STORAGE_KEY = "clubPanchosDemo_v1";
-let db = loadDB();
-let currentClientCi = sessionStorage.getItem("clubPanchosCurrentCi") || "";
-let cart = [];
-let currentMonth = new Date().getMonth();
-let currentYear = new Date().getFullYear();
-let selectedDate = null;
-let selectedCombo = null;
-let selectedEventType = "";
-let selectedPayment = "";
-let occupiedDates = ["2026-10-20"];
-const rewards = [
- {id:"pancho",name:"Pancho clÃ¡sico gratis",icon:"ð­",description:"Un pancho clÃ¡sico para disfrutar en el local.",points:100},
- {id:"vaso",name:"Vaso del Club",icon:"ð¥¤",description:"Un vaso del Club, sujeto a disponibilidad.",points:200},
- {id:"combo",name:"Combo gratis seleccionado",icon:"ð",description:"Un combo elegido por el local para canjear.",points:500}
-];
-function loadDB(){
- try{
-  const raw=localStorage.getItem(STORAGE_KEY);
-  if(raw){const parsed=JSON.parse(raw);if(parsed&&parsed.clients&&Array.isArray(parsed.purchases))return parsed;}
- }catch(e){console.warn("No se pudieron leer los datos guardados",e);}
- return {clients:{},purchases:[],orders:[],reservations:[],redemptions:[]};
-}
-function saveDB(){localStorage.setItem(STORAGE_KEY,JSON.stringify(db));}
-function normalizeCi(value){return String(value||"").replace(/[\s.-]/g,"").trim();}
-function escapeHTML(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function getCurrentClient(){return currentClientCi&&db.clients[currentClientCi]?db.clients[currentClientCi]:null;}
-function ensureClientFields(client){client.points=Number(client.points)||0;client.history=Array.isArray(client.history)?client.history:[];client.orderIds=Array.isArray(client.orderIds)?client.orderIds:[];client.reservationIds=Array.isArray(client.reservationIds)?client.reservationIds:[];}
-function showScreen(id){
- const target=document.getElementById(id);if(!target)return;
- document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
- target.classList.add("active");
- document.querySelectorAll(".nav-button").forEach(b=>b.classList.toggle("active",b.dataset.screen===id || (["register","login","rewards"].includes(id)&&b.dataset.screen==="profile") || (["orderData","orderSuccess"].includes(id)&&b.dataset.screen==="cart") || (["calendar","eventData","combos","reservation"].includes(id)&&b.dataset.screen==="events")));
- if(id==="profile")renderProfile();
- if(id==="rewards")renderRewards();
- if(id==="admin")renderAdmin();
- window.scrollTo({top:0,behavior:"smooth"});
-}
-function showMessage(message){alert(message);}
-function addToCart(product){
- const existing=cart.find(i=>i.name===product);
- if(existing)existing.quantity++;else cart.push({name:product,quantity:1});
- updateCart();showMessage(product+" se agregÃ³ al carrito.");
-}
-function updateCart(){
- document.getElementById("cartCount").textContent=cart.reduce((sum,i)=>sum+i.quantity,0);renderCart();
-}
-function renderCart(){
- const container=document.getElementById("cartItems"),empty=document.getElementById("emptyCart"),total=document.getElementById("cartTotal");
- if(!cart.length){container.innerHTML="";empty.style.display="block";total.style.display="none";return;}
- empty.style.display="none";total.style.display="block";
- container.innerHTML=cart.map((item,index)=>`<div class="cart-item"><div><strong>${escapeHTML(item.name)}</strong><p class="small">Precio a definir</p></div><div class="quantity"><button onclick="changeQuantity(${index},-1)" aria-label="Restar">â</button><strong>${item.quantity}</strong><button onclick="changeQuantity(${index},1)" aria-label="Sumar">+</button></div></div>`).join("");
-}
-function changeQuantity(index,amount){if(!cart[index])return;cart[index].quantity+=amount;if(cart[index].quantity<=0)cart.splice(index,1);updateCart();}
-function selectChoice(element){element.parentElement.querySelectorAll(".choice").forEach(c=>c.classList.remove("selected"));element.classList.add("selected");selectedPayment=element.textContent.trim();}
-function confirmOrder(){
- const name=document.getElementById("orderName").value.trim(),phone=document.getElementById("orderPhone").value.trim(),date=document.getElementById("pickupDate").value,time=document.getElementById("pickupTime").value;
- if(!name||!phone||!date||!time){showMessage("CompletÃ¡ nombre, telÃ©fono, fecha y hora.");return;}
- if(!cart.length){showMessage("El carrito estÃ¡ vacÃ­o.");showScreen("cart");return;}
- const client=getCurrentClient();
- const order={id:"PED-"+Date.now(),clientCi:client?currentClientCi:"",name,phone,date,time,items:cart.map(i=>({...i})),status:"Pendiente de confirmaciÃ³n",createdAt:new Date().toISOString(),paid:false};
- db.orders.push(order);if(client)client.orderIds.push(order.id);saveDB();
- document.getElementById("orderSuccessStatus").textContent="Pedido "+order.id+" Â· Pendiente";
- cart=[];updateCart();renderProfile();showScreen("orderSuccess");
-}
-function startEventReservation(){showScreen("events");}
-function renderCalendar(){
- const title=document.getElementById("calendarTitle"),container=document.getElementById("calendarDays");
- const names=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
- title.textContent=names[currentMonth]+" "+currentYear;
- const first=new Date(currentYear,currentMonth,1).getDay(),daysInMonth=new Date(currentYear,currentMonth+1,0).getDate();
- let start=first===0?6:first-1,html="";
- for(let i=0;i<start;i++)html+="<div></div>";
- const today=new Date();today.setHours(0,0,0,0);
- for(let day=1;day<=daysInMonth;day++){
-  const date=`${currentYear}-${String(currentMonth+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
-  const occupied=occupiedDates.includes(date)||db.reservations.some(r=>r.date===date&&r.status!=="Cancelada");
-  const past=new Date(date+"T12:00:00")<today;
-  const cls=occupied||past?"occupied":"available";
-  html+=`<div class="day ${cls} ${selectedDate===date?"selected":""}" ${!occupied&&!past?`onclick="selectDate('${date}')"`:""}>${day}</div>`;
- }
- container.innerHTML=html;
-}
-function changeMonth(amount){currentMonth+=amount;if(currentMonth<0){currentMonth=11;currentYear--;}if(currentMonth>11){currentMonth=0;currentYear++;}renderCalendar();}
-function selectDate(date){
- selectedDate=date;document.getElementById("selectedDateBox").style.display="block";
- document.getElementById("selectedDateText").textContent=formatDate(date);renderCalendar();
-}
-function selectEvent(element){document.querySelectorAll("#eventData .choice").forEach(c=>c.classList.remove("selected"));element.classList.add("selected");selectedEventType=element.textContent.trim();}
-function renderCombos(){
- document.getElementById("comboList").innerHTML=[1,2,3,4].map(n=>`<div class="product-card"><h3>Combo ${n}</h3><p class="product-description">Contenido y precio a definir.</p><div class="product-bottom"><span class="price">Precio a definir</span><button class="add-button" onclick="selectCombo(${n})">ELEGIR</button></div></div>`).join("");
-}
-function selectCombo(number){
- if(!selectedDate){showMessage("Primero elegÃ­ una fecha para el evento.");showScreen("calendar");return;}
- const people=document.getElementById("eventPeople").value, time=document.getElementById("eventTime").value, place=document.getElementById("eventPlace").value.trim(), address=document.getElementById("eventAddress").value.trim(), name=document.getElementById("eventContactName").value.trim(), phone=document.getElementById("eventContactPhone").value.trim();
- if(!selectedEventType||!people||Number(people)<1||!time||!place||!address||!name||!phone){showMessage("CompletÃ¡ el tipo de evento, cantidad de personas, hora, lugar, direcciÃ³n, nombre y telÃ©fono.");showScreen("eventData");return;}
- if(db.reservations.some(r=>r.date===selectedDate&&r.status!=="Cancelada")||occupiedDates.includes(selectedDate)){showMessage("Esa fecha ya no estÃ¡ disponible. ElegÃ­ otra.");showScreen("calendar");return;}
- const client=getCurrentClient(),reservation={id:"RES-"+Date.now(),clientCi:client?currentClientCi:"",date:selectedDate,eventType:selectedEventType,people:Number(people),time,place,address,name,phone,combo:number,status:"Pendiente de confirmaciÃ³n",createdAt:new Date().toISOString()};
- db.reservations.push(reservation);if(client)client.reservationIds.push(reservation.id);saveDB();selectedCombo=number;
- document.getElementById("reservationSummary").innerHTML=`Fecha: <strong>${escapeHTML(formatDate(selectedDate))}</strong><br><br>Tipo: <strong>${escapeHTML(selectedEventType)}</strong><br><br>Personas: <strong>${Number(people)}</strong><br><br>Hora: <strong>${escapeHTML(time)}</strong><br><br>Lugar: <strong>${escapeHTML(place)}</strong><br><br>Combo: <strong>${number}</strong><br><br>Estado: <strong>Pendiente de confirmaciÃ³n</strong>`;
- renderCalendar();renderProfile();showScreen("reservation");
-}
-function formatDate(date){if(!date)return"No seleccionada";return new Date(date+"T12:00:00").toLocaleDateString("es-UY",{weekday:"long",day:"numeric",month:"long",year:"numeric"});}
-function registerClient(event){
- event.preventDefault();
- const name=document.getElementById("regName").value.trim(),ci=normalizeCi(document.getElementById("regCi").value),phone=document.getElementById("regPhone").value.trim();
- if(!name||!ci||!phone){showMessage("CompletÃ¡ todos los campos obligatorios.");return;}
- if(!/^\d{6,12}$/.test(ci)){showMessage("IngresÃ¡ una cÃ©dula vÃ¡lida usando solo nÃºmeros (sin puntos ni guion).");return;}
- if(db.clients[ci]){showMessage("Ya existe una cuenta registrada con esa cÃ©dula. IngresÃ¡ desde âEntrar con cÃ©dulaâ.");return;}
- db.clients[ci]={name,ci,phone,points:0,history:[{type:"welcome",description:"Cuenta creada en Puntos del Club",points:0,date:new Date().toISOString()}],orderIds:[],reservationIds:[],createdAt:new Date().toISOString()};
- saveDB();currentClientCi=ci;sessionStorage.setItem("clubPanchosCurrentCi",ci);document.getElementById("registerForm").reset();renderProfile();showMessage("Â¡Cuenta creada! Tu perfil ya estÃ¡ disponible en Mi Club.");showScreen("profile");
-}
-function loginClient(event){
- event.preventDefault();const ci=normalizeCi(document.getElementById("loginCi").value);
- if(!db.clients[ci]){showMessage("No encontramos una cuenta con esa cÃ©dula. Primero tenÃ©s que crear una cuenta.");return;}
- currentClientCi=ci;sessionStorage.setItem("clubPanchosCurrentCi",ci);document.getElementById("loginCi").value="";renderProfile();showMessage("SesiÃ³n iniciada.");showScreen("profile");
-}
-function logout(){currentClientCi="";sessionStorage.removeItem("clubPanchosCurrentCi");renderProfile();showMessage("Cerraste sesiÃ³n.");showScreen("profile");}
-function renderProfile(){
- const client=getCurrentClient(),out=document.getElementById("profileLoggedOut"),inside=document.getElementById("profileLoggedIn");
- out.style.display=client?"none":"block";inside.style.display=client?"block":"none";
- if(!client)return;ensureClientFields(client);
- document.getElementById("profileName").textContent=client.name;
- document.getElementById("profilePoints").textContent=client.points;
- const next=[100,200,500].find(n=>client.points<n),target=next||500,progress=next?Math.min(100,client.points/target*100):100;
- document.getElementById("progressFill").style.width=progress+"%";
- document.getElementById("progressText").textContent=next?`Te faltan ${next-client.points} puntos para llegar a la recompensa de ${next} puntos.`:"Â¡Ya alcanzaste el nivel de puntos de las recompensas iniciales!";
- document.getElementById("pointsHistory").innerHTML=client.history.length?client.history.slice().reverse().map(h=>`<div class="history-item"><div><strong>${escapeHTML(h.description)}</strong><div class="small">${new Date(h.date).toLocaleString("es-UY")}</div></div><span class="${h.points>0?"positive":h.points<0?"negative":""}">${h.points>0?"+":""}${h.points} pts</span></div>`).join(""):'<p class="small">TodavÃ­a no hay movimientos.</p>';
- const orders=db.orders.filter(o=>o.clientCi===currentClientCi);
- document.getElementById("myOrders").innerHTML=orders.length?orders.slice().reverse().map(o=>`<div class="history-item"><div><strong>${escapeHTML(o.id)}</strong><div class="small">${o.items.map(i=>escapeHTML(i.name)+" Ã "+i.quantity).join(", ")}<br>${escapeHTML(formatDate(o.date))} Â· ${escapeHTML(o.time)}</div></div><span class="status">${escapeHTML(o.status)}</span></div>`).join(""):'<p class="small">TodavÃ­a no tenÃ©s pedidos asociados a esta cuenta.</p>';
- const reservations=db.reservations.filter(r=>r.clientCi===currentClientCi);
- document.getElementById("myReservations").innerHTML=reservations.length?reservations.slice().reverse().map(r=>`<div class="history-item"><div><strong>${escapeHTML(r.eventType)} Â· Combo ${r.combo}</strong><div class="small">${escapeHTML(formatDate(r.date))}<br>${r.people} personas Â· ${escapeHTML(r.time)}<br>${escapeHTML(r.place)}</div></div><span class="status">${escapeHTML(r.status)}</span></div>`).join(""):'<p class="small">TodavÃ­a no tenÃ©s reservas asociadas a esta cuenta.</p>';
-}
-function renderRewards(){
- const client=getCurrentClient();
- document.getElementById("rewardsList").innerHTML=rewards.map(r=>`<div class="reward-card"><div class="reward-icon">${r.icon}</div><h3>${r.name}</h3><p class="muted">${r.description}</p><div class="points-pill">${r.points} puntos</div><button class="main-button" onclick="redeemReward('${r.id}')">CANJEAR</button></div>`).join("");
-}
-function redeemReward(id){
- const client=getCurrentClient();if(!client){showMessage("Primero iniciÃ¡ sesiÃ³n en Mi Club.");showScreen("login");return;}
- const reward=rewards.find(r=>r.id===id);if(!reward)return;
- if(client.points<reward.points){showMessage(`TodavÃ­a no tenÃ©s suficientes puntos. Te faltan ${reward.points-client.points} puntos para canjear ${reward.name}.`);return;}
- if(!confirm(`Â¿QuerÃ©s canjear â${reward.name}â por ${reward.points} puntos? El canje quedarÃ¡ pendiente de entrega por el local.`))return;
- if(client.points<reward.points){showMessage("No tenÃ©s puntos suficientes para este canje.");return;}
- client.points-=reward.points;const movement={type:"redemption",description:"Canje: "+reward.name,points:-reward.points,date:new Date().toISOString(),rewardId:reward.id,status:"Pendiente de entrega"};
- client.history.push(movement);db.redemptions.push({id:"CAN-"+Date.now(),clientCi:currentClientCi,...movement});saveDB();renderProfile();renderRewards();showMessage("Canje registrado. Queda pendiente de entrega por parte del local.");showScreen("profile");
-}
-function registerPurchase(event){
- event.preventDefault();const ci=normalizeCi(document.getElementById("adminCi").value),amount=Number(document.getElementById("adminAmount").value);
- if(!db.clients[ci]){showMessage("No existe una cuenta registrada con esa cÃ©dula.");return;}
- if(!Number.isFinite(amount)||amount<=0||!Number.isInteger(amount)){showMessage("IngresÃ¡ un importe vÃ¡lido en pesos uruguayos, sin decimales.");return;}
- const points=Math.floor(amount/10),client=db.clients[ci];ensureClientFields(client);
- const purchase={id:"COMP-"+Date.now(),clientCi:ci,amount,points,date:new Date().toISOString(),paid:true};
- db.purchases.push(purchase);client.points+=points;client.history.push({type:"purchase",description:`Compra pagada ${purchase.id} Â· $${amount}`,points,date:purchase.date,purchaseId:purchase.id});saveDB();
- document.getElementById("adminResult").textContent=`Compra registrada: $${amount}. Se acreditaron ${points} puntos a ${client.name}.`;
- document.getElementById("adminCi").value="";document.getElementById("adminAmount").value="";renderAdmin();renderProfile();showMessage(`Compra registrada. ${client.name} recibiÃ³ ${points} puntos.`);
-}
-function renderAdmin(){
- const clients=Object.values(db.clients),sales=db.purchases.reduce((sum,p)=>sum+p.amount,0);
- document.getElementById("adminClients").textContent=clients.length;document.getElementById("adminOrders").textContent=db.orders.length;document.getElementById("adminSales").textContent="$"+sales.toLocaleString("es-UY");
- document.getElementById("adminPurchaseHistory").innerHTML=db.purchases.length?db.purchases.slice().reverse().slice(0,10).map(p=>`<div class="history-item"><div><strong>$${p.amount.toLocaleString("es-UY")} Â· ${p.points} puntos</strong><div class="small">CÃ©dula: ${escapeHTML(p.clientCi)} Â· ${new Date(p.date).toLocaleString("es-UY")}</div></div></div>`).join(""):'<p class="small">No hay compras registradas.</p>';
- document.getElementById("adminOrderList").innerHTML=db.orders.length?db.orders.slice().reverse().map(o=>`<div class="history-item"><div><strong>${escapeHTML(o.id)} Â· ${escapeHTML(o.name)}</strong><div class="small">${escapeHTML(o.phone)} Â· ${o.items.map(i=>escapeHTML(i.name)+" Ã "+i.quantity).join(", ")}</div></div><span class="status">${escapeHTML(o.status)}</span></div>`).join(""):'<p class="small">No hay pedidos registrados.</p>';
- document.getElementById("adminReservationList").innerHTML=db.reservations.length?db.reservations.slice().reverse().map(r=>`<div class="history-item"><div><strong>${escapeHTML(r.id)} Â· ${escapeHTML(r.name)}</strong><div class="small">${escapeHTML(formatDate(r.date))} Â· ${r.people} personas Â· Combo ${r.combo}<br>${escapeHTML(r.phone)}</div></div><span class="status">${escapeHTML(r.status)}</span></div>`).join(""):'<p class="small">No hay reservas registradas.</p>';
-}
-renderCalendar();renderCombos();updateCart();renderProfile();renderAdmin();
-</script>
-</body>
-</html>
-
-<section id="home" class="screen active">
-  <div class="hero">
-    <div class="fake-hotdog">🌭</div>
-    <h1>El Club<br>de los<br>Panchos</h1>
-    <p>Panchos, eventos y un carrito que llega directo a tu fiesta.</p>
-    <button class="main-button" onclick="showScreen('menu')">PEDIR AHORA</button>
-    <button class="secondary-button" onclick="startEventReservation()">RESERVAR PARA UN EVENTO</button>
-  </div>
-
-  <div class="container">
-    <h2 class="section-title">¿Qué estás buscando?</h2>
-
-    <div class="home-card" onclick="showScreen('menu')">
-      <h3>🌭 Pedí para retirar</h3>
-      <p>Elegí tu pancho, hacé tu pedido y pasá a retirarlo por el local.</p>
-    </div>
-
-    <div class="home-card" onclick="startEventReservation()">
-      <h3>🚚 Llevamos el Club a tu fiesta</h3>
-      <p>Reservá nuestro carrito para cumpleaños, fiestas y eventos.</p>
-    </div>
-
-    <div class="home-card">
-      <h3>🌙 Nuestro local</h3>
-      <p>Atención en el local durante la noche.</p>
-      <p style="margin-top:8px">Efectivo · Transferencia</p>
-    </div>
-
-    <div class="home-card">
-      <h3>Nuestra misión</h3>
-      <p>Somos el primer local de la ciudad dedicado a la venta exclusiva de panchos. Ofrecemos una experiencia gastronómica innovadora, única y de alta calidad tanto en nuestro local físico como en eventos. Nos caracterizamos por una atención ágil, amigable y accesible, orientada a superar las expectativas de nuestros clientes y a mantenernos responsables con el medio ambiente.</p>
-    </div>
-
-    <div class="home-card">
-      <h3>Nuestra visión</h3>
-      <p>Ser una empresa líder y referente de comida rápida de la ciudad y el país, expandiéndonos a través de nuevos locales y eventos, y siendo reconocidos por nuestra innovación constante, la confianza de nuestros clientes y un modelo de negocio sostenible.</p>
-    </div>
-
-    <div class="notice">
-      <strong>Demostración local:</strong> las cuentas y los datos se guardan solo en este navegador. No se sincronizan entre dispositivos y el acceso con cédula no verifica la identidad. No usar para gestionar clientes reales.
-    </div>
-  </div>
-</section>
-
-<section id="menu" class="screen">
-  <div class="container">
-    <h2 class="section-title">🌭 El menú</h2>
-
-    <div class="product-card">
-      <div class="product-image">🌭</div>
-      <h3>Pancho Normal</h3>
-      <p class="product-description">El clásico del Club.</p>
-      <div class="product-bottom">
-        <span class="price">Precio a definir</span>
-        <button class="add-button" onclick="addToCart('Pancho Normal')">+ AGREGAR</button>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-image">🌭</div>
-      <h3>Pancho Extra Largo</h3>
-      <p class="product-description">Más largo. Más pancho.</p>
-      <div class="product-bottom">
-        <span class="price">Precio a definir</span>
-        <button class="add-button" onclick="addToCart('Pancho Extra Largo')">+ AGREGAR</button>
-      </div>
-    </div>
-
-    <h2 class="section-title" style="margin-top:25px">🍟 Combos</h2>
-
-    <div class="product-card">
-      <h3>Combo 1</h3>
-      <p class="product-description">Contenido a definir.</p>
-      <div class="product-bottom">
-        <span class="price">Precio a definir</span>
-        <button class="add-button" onclick="addToCart('Combo 1')">+ AGREGAR</button>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <h3>Combo 2</h3>
-      <p class="product-description">Contenido a definir.</p>
-      <div class="product-bottom">
-        <span class="price">Precio a definir</span>
-        <button class="add-button" onclick="addToCart('Combo 2')">+ AGREGAR</button>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <h3>Combo 3</h3>
-      <p class="product-description">Contenido a definir.</p>
-      <div class="product-bottom">
-        <span class="price">Precio a definir</span>
-        <button class="add-button" onclick="addToCart('Combo 3')">+ AGREGAR</button>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <h3>Combo 4</h3>
-      <p class="product-description">Contenido a definir.</p>
-      <div class="product-bottom">
-        <span class="price">Precio a definir</span>
-        <button class="add-button" onclick="addToCart('Combo 4')">+ AGREGAR</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="cart" class="screen">
-  <div class="container">
-    <h2 class="section-title">🛒 Tu pedido</h2>
-
-    <div id="cartItems"></div>
-
-    <div id="emptyCart" style="text-align:center;padding:35px 10px">
-      <div style="font-size:58px">🌭</div>
-      <h3>Tu carrito está vacío</h3>
-      <p class="muted" style="margin-top:8px">Agregá algo rico del menú.</p>
-      <button class="main-button" onclick="showScreen('menu')">VER MENÚ</button>
-    </div>
-
-    <div id="cartTotal" class="total-box" style="display:none">
-      <p>Los precios todavía no están definidos, por eso este pedido es una solicitud y no se calcula un total ni se acreditan puntos automáticamente.</p>
-      <button class="main-button" style="background:var(--orange);color:var(--brown2)" onclick="showScreen('orderData')">CONTINUAR</button>
-    </div>
-  </div>
-</section>
+<title>Club de los Panchos</title>
 
 <style>
-/* Estilos adicionales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff8ec;
+    color: #3b2417;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.app {
+    max-width: 480px;
+    margin: auto;
+    min-height: 100vh;
+    background: #fff8ec;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+    background: #4a2b1b;
+    color: white;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.logo {
+    font-weight: 900;
+    font-size: 21px;
+    line-height: 18px;
+}
+
+.logo span {
+    color: #ffb52e;
+}
+
+/* LOGO AGREGADO */
+.logo img {
+    width: 150px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.cart-icon {
+    background: #ffb52e;
+    color: #3b2417;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    font-size: 19px;
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    right: -3px;
+    top: -4px;
+    background: #e65325;
+    color: white;
+    border-radius: 50%;
+    width: 19px;
+    height: 19px;
+    font-size: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ================= SCREENS ================= */
+
+.screen {
+    display: none;
+    padding-bottom: 90px;
+}
+
+.screen.active {
+    display: block;
+}
+
+.container {
+    padding: 20px;
+}
+
+/* ================= HOME ================= */
+
+.hero {
+    background: #f29b27;
+    margin: 18px;
+    border-radius: 25px;
+    padding: 30px 22px;
+    color: #3b2417;
+}
+
+.hero h1 {
+    font-size: 38px;
+    line-height: 0.95;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.hero p {
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.fake-hotdog {
+    font-size: 80px;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.main-button {
+    width: 100%;
+    padding: 15px;
+    border-radius: 13px;
+    background: #4a2b1b;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 12px;
+}
+
+.secondary-button {
+    width: 100%;
+    padding: 15px;
+    border-radius: 13px;
+    background: white;
+    color: #4a2b1b;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 10px;
+    border: 2px solid #4a2b1b;
+}
+
+.section-title {
+    font-size: 26px;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.home-card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 3px 10px rgba(59,36,23,.08);
+}
+
+.home-card h3 {
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+.home-card p {
+    color: #765f51;
+    font-size: 14px;
+}
+
+/* ================= PRODUCTS ================= */
+
+.product-card {
+    background: white;
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 15px;
+    box-shadow: 0 3px 10px rgba(59,36,23,.08);
+}
+
+.product-image {
+    background: #ffe0a3;
+    border-radius: 16px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    margin-bottom: 14px;
+}
+
+.product-card h3 {
+    font-size: 21px;
+}
+
+.product-description {
+    font-size: 13px;
+    color: #765f51;
+    margin: 5px 0 12px;
+}
+
+.product-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-weight: 900;
+    font-size: 19px;
+}
+
+.add-button {
+    background: #f29b27;
+    padding: 11px 17px;
+    border-radius: 11px;
+    font-weight: bold;
+}
+
+/* ================= CART ================= */
+
+.cart-item {
+    background: white;
+    padding: 16px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity button {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #f29b27;
+    font-weight: bold;
+}
+
+.total-box {
+    background: #4a2b1b;
+    color: white;
+    border-radius: 18px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+.total-row strong {
+    font-size: 24px;
+}
+
+/* ================= CALENDAR ================= */
+
 .calendar {
-  background: var(--white, #fff);
-  border-radius: 16px;
-  padding: 16px;
-  margin-top: 16px;
+    background: white;
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: 0 3px 10px rgba(59,36,23,.08);
 }
 
 .calendar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.calendar-header button {
+    background: #f29b27;
+    border-radius: 9px;
+    width: 35px;
+    height: 35px;
 }
 
 .calendar-title {
-  font-weight: 700;
-  font-size: 17px;
+    font-size: 18px;
+    font-weight: 900;
 }
 
 .weekdays,
 .days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-  text-align: center;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
 }
 
-.weekdays {
-  margin-bottom: 8px;
-  font-size: 12px;
-  color: #777;
+.weekdays div {
+    text-align: center;
+    font-size: 11px;
+    font-weight: bold;
+    color: #8b7465;
+    padding-bottom: 8px;
 }
 
 .day {
-  padding: 10px 0;
-  border-radius: 10px;
-  cursor: pointer;
-  border: 1px solid transparent;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 13px;
 }
 
-.day:hover {
-  background: #f4e9dc;
+.day.available {
+    background: #fff2d5;
+    cursor: pointer;
+}
+
+.day.available:hover {
+    background: #f29b27;
+}
+
+.day.occupied {
+    background: #e5dcd6;
+    color: #9b8d84;
+    text-decoration: line-through;
 }
 
 .day.selected {
-  background: #e67e22;
-  color: white;
-}
-
-.day.disabled {
-  color: #ccc;
-  cursor: default;
-}
-
-.day.has-event {
-  border-color: #e67e22;
+    background: #4a2b1b;
+    color: white;
 }
 
 .legend {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  font-size: 12px;
-  margin-top: 12px;
-  color: #666;
+    display: flex;
+    gap: 15px;
+    font-size: 11px;
+    margin-top: 15px;
+}
+
+.legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-right: 4px;
-  background: #e67e22;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
 }
 
+.dot.green {
+    background: #f29b27;
+}
+
+.dot.red {
+    background: #aaa;
+}
+
+/* ================= FORMS ================= */
+
 .form-group {
-  margin-bottom: 16px;
+    margin-bottom: 17px;
 }
 
 .form-group label {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 6px;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
 }
 
 input,
 select,
 textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  font: inherit;
-  background: #fff;
-  color: #292929;
+    width: 100%;
+    padding: 13px;
+    border-radius: 11px;
+    border: 1px solid #d6c5b7;
+    background: white;
+    font-family: inherit;
+    font-size: 14px;
 }
 
 textarea {
-  resize: vertical;
-  min-height: 90px;
+    min-height: 90px;
 }
 
 .choice-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
 .choice {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 12px;
-  cursor: pointer;
-  text-align: center;
+    background: white;
+    border: 2px solid #eadbd0;
+    border-radius: 14px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
 }
 
 .choice.selected {
-  border-color: #e67e22;
-  background: #fff3e7;
+    border-color: #f29b27;
+    background: #fff0cd;
 }
 
+/* ================= STATUS ================= */
+
 .success {
-  text-align: center;
-  padding: 28px 16px;
+    text-align: center;
+    padding: 45px 20px;
 }
 
 .success-icon {
-  font-size: 48px;
-  margin-bottom: 12px;
+    font-size: 75px;
+    margin-bottom: 20px;
 }
 
 .success h1 {
-  font-size: 24px;
-  margin-bottom: 8px;
+    font-size: 29px;
+    margin-bottom: 10px;
 }
 
 .status {
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 20px;
-  background: #fff0d9;
-  color: #995315;
-  font-size: 12px;
-  font-weight: 600;
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: #fff0c9;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 12px;
 }
 
-.admin-stat,
+/* ================= ADMIN ================= */
+
+.admin-card {
+    background: white;
+    padding: 18px;
+    border-radius: 17px;
+    margin-bottom: 12px;
+    box-shadow: 0 3px 10px rgba(59,36,23,.07);
+}
+
+.admin-card h3 {
+    margin-bottom: 7px;
+}
+
+.admin-stat {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
 .stat {
-  background: #fff;
-  border-radius: 14px;
-  padding: 16px;
-  text-align: center;
+    background: #f29b27;
+    border-radius: 15px;
+    padding: 15px 8px;
+    text-align: center;
 }
 
-.admin-stat strong,
 .stat strong {
-  display: block;
-  font-size: 22px;
-  margin-bottom: 4px;
+    display: block;
+    font-size: 22px;
 }
+
+/* ================= BOTTOM NAV ================= */
 
 .bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: #fff;
-  border-top: 1px solid #eee;
-  padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: 70px;
+    background: white;
+    border-top: 1px solid #eadbd0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    z-index: 30;
 }
 
 .nav-button {
-  flex: 1;
-  border: none;
-  background: transparent;
-  color: #777;
-  font-size: 11px;
-  padding: 5px 2px;
-  cursor: pointer;
+    background: white;
+    color: #806b5d;
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
 .nav-button.active {
-  color: #e67e22;
-  font-weight: 700;
+    color: #e87920;
+    font-weight: bold;
 }
 
 .nav-icon {
-  display: block;
-  font-size: 21px;
-  margin-bottom: 3px;
+    font-size: 21px;
 }
+
+/* ================= BACK ================= */
 
 .back {
-  border: none;
-  background: transparent;
-  padding: 8px 0;
-  cursor: pointer;
-  font: inherit;
-}
-
-.points-number {
-  font-size: 32px;
-  font-weight: 800;
-}
-
-.progress-track {
-  height: 8px;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #eee;
-  margin: 12px 0;
-}
-
-.progress-fill {
-  height: 100%;
-  background: #e67e22;
-  border-radius: 8px;
-}
-
-.reward-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px;
-  border: 1px solid #eee;
-  border-radius: 14px;
-  margin-bottom: 12px;
-  background: #fff;
-}
-
-.reward-icon {
-  font-size: 28px;
-}
-
-.points-pill {
-  border-radius: 20px;
-  background: #fff0d9;
-  color: #995315;
-  padding: 5px 10px;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.history-item {
-  padding: 12px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.notice {
-  background: #fff3e7;
-  border-radius: 12px;
-  padding: 12px;
-  font-size: 13px;
-  margin: 12px 0;
-}
-
-.small {
-  font-size: 12px;
-  color: #777;
-}
-
-.inline-button {
-  border: none;
-  background: transparent;
-  color: #b85d0b;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 4px;
-}
-
-@media (min-width: 481px) {
-  .app {
-    max-width: 480px;
-    margin: 0 auto;
-    box-shadow: 0 0 30px #00000012;
-  }
-
-  .bottom-nav {
-    left: 50%;
-    right: auto;
-    width: 480px;
-    transform: translateX(-50%);
-  }
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    font-weight: bold;
+    margin-bottom: 18px;
+    color: #4a2b1b;
 }
 </style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+    <div class="logo">
+        <img src="logopanchos.jpg.JPG" alt="Club de los Panchos">
+    </div>
+
+    <button class="cart-icon" onclick="showScreen('cart')">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+</header>
+
+<!-- ================= INICIO ================= -->
+
+<section id="home" class="screen active">
+
+    <div class="hero">
+        <div class="fake-hotdog">🌭</div>
+
+        <h1>El Club<br>de los<br>Panchos</h1>
+
+        <p>
+            Panchos, eventos y un carrito que llega
+            directo a tu fiesta.
+        </p>
+
+        <button class="main-button"
+                onclick="showScreen('menu')">
+            🌭 PEDIR AHORA
+        </button>
+
+        <button class="secondary-button"
+                onclick="startEventReservation()">
+            🚚 RESERVAR PARA UN EVENTO
+        </button>
+    </div>
+
+    <div class="container">
+
+        <h2 class="section-title">
+            ¿Qué estás buscando?
+        </h2>
+
+        <div class="home-card"
+             onclick="showScreen('menu')">
+
+            <h3>🌭 Pedí para retirar</h3>
+
+            <p>
+                Elegí tu pancho, hacé tu pedido
+                y pasá a retirarlo por el local.
+            </p>
+        </div>
+
+        <div class="home-card"
+             onclick="startEventReservation()">
+
+            <h3>🚚 Llevamos el Club a tu fiesta</h3>
+
+            <p>
+                Reservá nuestro carrito para cumpleaños,
+                fiestas y eventos.
+            </p>
+        </div>
+
+        <div class="home-card">
+
+            <h3>🌙 Nuestro local</h3>
+
+            <p>
+                Atención en el local durante la noche.
+            </p>
+
+            <p style="margin-top:8px;">
+                💳 Efectivo · Transferencia
+            </p>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= MENU ================= -->
+
+<section id="menu" class="screen">
+
+    <div class="container">
+
+        <h2 class="section-title">🌭 El menú</h2>
+
+        <div class="product-card">
+
+            <div class="product-image">🌭</div>
+
+            <h3>Pancho Normal</h3>
+
+            <p class="product-description">
+                El clásico del Club.
+            </p>
+
+            <div class="product-bottom">
+
+                <span class="price">$ —</span>
+
+                <button class="add-button"
+                        onclick="addToCart('Pancho Normal')">
+                    + AGREGAR
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="product-card">
+
+            <div class="product-image">🌭</div>
+
+            <h3>Pancho Extra Largo</h3>
+
+            <p class="product-description">
+                Más largo. Más pancho.
+            </p>
+
+            <div class="product-bottom">
+
+                <span class="price">$ —</span>
+
+                <button class="add-button"
+                        onclick="addToCart('Pancho Extra Largo')">
+                    + AGREGAR
+                </button>
+
+            </div>
+
+        </div>
+
+        <h2 class="section-title"
+            style="margin-top:30px;">
+            🍟 Combos
+        </h2>
+
+        <div class="product-card">
+
+            <h3>Combo 1</h3>
+
+            <p class="product-description">
+                Próximamente se definirá qué incluye.
+            </p>
+
+            <div class="product-bottom">
+                <span class="price">$ —</span>
+
+                <button class="add-button"
+                        onclick="addToCart('Combo 1')">
+                    + AGREGAR
+                </button>
+            </div>
+
+        </div>
+
+        <div class="product-card">
+
+            <h3>Combo 2</h3>
+
+            <p class="product-description">
+                Próximamente se definirá qué incluye.
+            </p>
+
+            <div class="product-bottom">
+                <span class="price">$ —</span>
+
+                <button class="add-button"
+                        onclick="addToCart('Combo 2')">
+                    + AGREGAR
+                </button>
+            </div>
+
+        </div>
+
+        <div class="product-card">
+
+            <h3>Combo 3</h3>
+
+            <p class="product-description">
+                Próximamente se definirá qué incluye.
+            </p>
+
+            <div class="product-bottom">
+                <span class="price">$ —</span>
+
+                <button class="add-button"
+                        onclick="addToCart('Combo 3')">
+                    + AGREGAR
+                </button>
+            </div>
+
+        </div>
+
+        <div class="product-card">
+
+            <h3>Combo 4</h3>
+
+            <p class="product-description">
+                Próximamente se definirá qué incluye.
+            </p>
+
+            <div class="product-bottom">
+                <span class="price">$ —</span>
+
+                <button class="add-button"
+                        onclick="addToCart('Combo 4')">
+                    + AGREGAR
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= CART ================= -->
+
+<section id="cart" class="screen">
+
+    <div class="container">
+
+        <h2 class="section-title">🛒 Tu pedido</h2>
+
+        <div id="cartItems"></div>
+
+        <div id="emptyCart"
+             style="text-align:center;padding:50px 10px;">
+
+            <div style="font-size:60px;">🌭</div>
+
+            <h3>Tu carrito está vacío</h3>
+
+            <p style="margin-top:8px;color:#806b5d;">
+                Agregá algo rico del menú.
+            </p>
+
+            <button class="main-button"
+                    onclick="showScreen('menu')">
+                VER MENÚ
+            </button>
+
+        </div>
+
+        <div id="cartTotal"
+             class="total-box"
+             style="display:none;">
+
+            <div class="total-row">
+                <span>Total</span>
+                <strong>$ —</strong>
+            </div>
+
+            <button class="main-button"
+                    style="background:#f29b27;color:#3b2417;"
+                    onclick="showScreen('orderData')">
+                CONTINUAR
+            </button>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= DATOS PEDIDO ================= -->
 
 <section id="orderData" class="screen">
-  <button class="back" onclick="showScreen('cart')">← Volver al carrito</button>
-  <h2>Datos del pedido</h2>
 
-  <div class="form-group">
-    <label for="orderName">Nombre completo</label>
-    <input id="orderName" type="text" placeholder="Tu nombre">
-  </div>
+    <div class="container">
 
-  <div class="form-group">
-    <label for="orderPhone">Teléfono</label>
-    <input id="orderPhone" type="tel" placeholder="Tu número de contacto">
-  </div>
+        <button class="back"
+                onclick="showScreen('cart')">
+            ← Volver
+        </button>
 
-  <div class="form-group">
-    <label for="pickupDate">Fecha de retiro</label>
-    <input id="pickupDate" type="date">
-  </div>
+        <h2 class="section-title">
+            Casi está 🌭
+        </h2>
 
-  <div class="form-group">
-    <label for="pickupTime">Horario de retiro</label>
-    <select id="pickupTime">
-      <option value="">Seleccioná un horario</option>
-      <option value="12:00 a 14:00">12:00 a 14:00</option>
-      <option value="14:00 a 16:00">14:00 a 16:00</option>
-      <option value="18:00 a 20:00">18:00 a 20:00</option>
-      <option value="20:00 a 22:00">20:00 a 22:00</option>
-    </select>
-  </div>
+        <div class="form-group">
+            <label>Nombre</label>
+            <input id="orderName"
+                   type="text"
+                   placeholder="Tu nombre">
+        </div>
 
-  <div class="form-group">
-    <label>Forma de pago</label>
-    <div class="choice-grid">
-      <div class="choice selected" data-payment="Efectivo"
-        onclick="selectChoice(this, 'payment')">
-        Efectivo
-      </div>
-      <div class="choice" data-payment="Transferencia"
-        onclick="selectChoice(this, 'payment')">
-        Transferencia
-      </div>
+        <div class="form-group">
+            <label>Teléfono</label>
+            <input id="orderPhone"
+                   type="tel"
+                   placeholder="Tu teléfono">
+        </div>
+
+        <div class="form-group">
+            <label>Fecha de retiro</label>
+            <input id="pickupDate"
+                   type="date">
+        </div>
+
+        <div class="form-group">
+            <label>Hora de retiro</label>
+            <input id="pickupTime"
+                   type="time">
+        </div>
+
+        <div class="form-group">
+            <label>Forma de pago</label>
+
+            <div class="choice-grid">
+
+                <div class="choice"
+                     onclick="selectChoice(this)">
+                    💵<br>Efectivo
+                </div>
+
+                <div class="choice"
+                     onclick="selectChoice(this)">
+                    🏦<br>Transferencia
+                </div>
+
+            </div>
+        </div>
+
+        <button class="main-button"
+                onclick="confirmOrder()">
+            CONFIRMAR PEDIDO
+        </button>
+
     </div>
-  </div>
-
-  <div class="notice">
-    Revisá tus datos antes de confirmar el pedido.
-  </div>
-
-  <button class="btn btn-primary" onclick="confirmOrder()">
-    Confirmar pedido
-  </button>
 </section>
+
+<!-- ================= PEDIDO CONFIRMADO ================= -->
 
 <section id="orderSuccess" class="screen">
-  <div class="success">
-    <div class="success-icon">✓</div>
-    <h1>¡Pedido registrado!</h1>
-    <p>Tu pedido quedó registrado. Contactanos para confirmar los detalles.</p>
-    <button class="btn btn-primary" onclick="showScreen('home')">
-      Volver al inicio
-    </button>
-  </div>
+
+    <div class="success">
+
+        <div class="success-icon">🌭</div>
+
+        <h1>¡Pedido confirmado!</h1>
+
+        <p>
+            Recibimos tu pedido correctamente.
+        </p>
+
+        <div class="status">
+            Pedido #024 · Preparando
+        </div>
+
+        <button class="main-button"
+                onclick="showScreen('home')">
+            VOLVER AL INICIO
+        </button>
+
+    </div>
+
 </section>
+
+<!-- ================= EVENTOS ================= -->
 
 <section id="events" class="screen">
-  <h2>Eventos</h2>
-  <p>Encontrá la fecha ideal para disfrutar de nuestros panchos.</p>
 
-  <div class="calendar">
-    <div class="calendar-header">
-      <button class="back" onclick="changeMonth(-1)">‹ Anterior</button>
-      <div id="calendarTitle" class="calendar-title"></div>
-      <button class="back" onclick="changeMonth(1)">Siguiente ›</button>
+    <div class="container">
+
+        <button class="back"
+                onclick="showScreen('home')">
+            ← Volver
+        </button>
+
+        <h2 class="section-title">
+            🚚 Llevamos el Club a tu fiesta
+        </h2>
+
+        <p style="line-height:1.5;color:#765f51;">
+            Reservá nuestro carrito para tu cumpleaños,
+            fiesta o evento.
+        </p>
+
+        <div class="hero"
+             style="margin:20px 0 0;">
+
+            <div class="fake-hotdog">🚚🌭</div>
+
+            <h2>Vos ponés la fiesta.</h2>
+
+            <h2>Nosotros llevamos los panchos.</h2>
+
+        </div>
+
+        <button class="main-button"
+                onclick="showScreen('calendar')">
+            ELEGIR FECHA
+        </button>
+
     </div>
-
-    <div class="weekdays">
-      <div>Lun</div>
-      <div>Mar</div>
-      <div>Mié</div>
-      <div>Jue</div>
-      <div>Vie</div>
-      <div>Sáb</div>
-      <div>Dom</div>
-    </div>
-
-    <div id="calendarDays" class="days"></div>
-
-    <div class="legend">
-      <span><span class="dot"></span>Fecha con evento</span>
-    </div>
-  </div>
-
-  <div id="eventData" class="card">
-    <h3>Seleccioná una fecha</h3>
-    <p>Elegí un día en el calendario para ver los eventos disponibles.</p>
-  </div>
 </section>
+
+<!-- ================= CALENDARIO ================= -->
+
+<section id="calendar" class="screen">
+
+    <div class="container">
+
+        <button class="back"
+                onclick="showScreen('events')">
+            ← Volver
+        </button>
+
+        <h2 class="section-title">
+            📅 Elegí la fecha
+        </h2>
+
+        <div class="calendar">
+
+            <div class="calendar-header">
+
+                <button onclick="changeMonth(-1)">
+                    ‹
+                </button>
+
+                <div class="calendar-title"
+                     id="calendarTitle">
+                </div>
+
+                <button onclick="changeMonth(1)">
+                    ›
+                </button>
+
+            </div>
+
+            <div class="weekdays">
+                <div>L</div>
+                <div>M</div>
+                <div>M</div>
+                <div>J</div>
+                <div>V</div>
+                <div>S</div>
+                <div>D</div>
+            </div>
+
+            <div class="days"
+                 id="calendarDays">
+            </div>
+
+            <div class="legend">
+
+                <span>
+                    <span class="dot green"></span>
+                    Disponible
+                </span>
+
+                <span>
+                    <span class="dot red"></span>
+                    Ocupado
+                </span>
+
+            </div>
+
+        </div>
+
+        <div id="selectedDateBox"
+             style="margin-top:18px;display:none;">
+
+            <div class="home-card">
+
+                <h3>Fecha seleccionada</h3>
+
+                <p id="selectedDateText"></p>
+
+            </div>
+
+            <button class="main-button"
+                    onclick="showScreen('eventData')">
+                CONTINUAR
+            </button>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= DATOS EVENTO ================= -->
+
+<section id="eventData" class="screen">
+
+    <div class="container">
+
+        <button class="back"
+                onclick="showScreen('calendar')">
+            ← Volver
+        </button>
+
+        <h2 class="section-title">
+            🎉 Tu evento
+        </h2>
+
+        <div class="form-group">
+
+            <label>Tipo de evento</label>
+
+            <div class="choice-grid">
+
+                <div class="choice"
+                     onclick="selectEvent(this)">
+                    🎂<br>Cumpleaños
+                </div>
+
+                <div class="choice"
+                     onclick="selectEvent(this)">
+                    💍<br>Casamiento
+                </div>
+
+                <div class="choice"
+                     onclick="selectEvent(this)">
+                    🎓<br>Fiesta
+                </div>
+
+                <div class="choice"
+                     onclick="selectEvent(this)">
+                    🏢<br>Empresarial
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Cantidad de personas</label>
+
+            <input id="eventPeople"
+                   type="number"
+                   min="1"
+                   placeholder="Ej: 40">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Hora del evento</label>
+
+            <input id="eventTime"
+                   type="time">
+
+            <small style="display:block;margin-top:6px;color:#806b5d;">
+                Eventos disponibles durante todo el día.
+            </small>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Lugar del evento</label>
+
+            <input id="eventPlace"
+                   type="text"
+                   placeholder="Ej: Salón, casa, quinta...">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Dirección</label>
+
+            <input id="eventAddress"
+                   type="text"
+                   placeholder="Dirección del evento">
+
+        </div>
+
+        <button class="main-button"
+                onclick="showScreen('combos')">
+            ELEGIR COMBO
+        </button>
+
+    </div>
+</section>
+
+<!-- ================= COMBOS ================= -->
 
 <section id="combos" class="screen">
-  <h2>Combos para compartir</h2>
-  <p>Elegí el combo que mejor se adapte a tu ocasión.</p>
 
-  <div class="card">
-    <h3>Combo 1 — Clásico</h3>
-    <p>Panchos clásicos para disfrutar en cualquier momento.</p>
-    <button class="btn btn-primary" onclick="selectCombo(1)">
-      Elegir combo
-    </button>
-  </div>
+    <div class="container">
 
-  <div class="card">
-    <h3>Combo 2 — Para compartir</h3>
-    <p>Una opción ideal para compartir con amigos o familia.</p>
-    <button class="btn btn-primary" onclick="selectCombo(2)">
-      Elegir combo
-    </button>
-  </div>
+        <button class="back"
+                onclick="showScreen('eventData')">
+            ← Volver
+        </button>
 
-  <div class="card">
-    <h3>Combo 3 — Extra</h3>
-    <p>Una opción más completa para quienes quieren algo diferente.</p>
-    <button class="btn btn-primary" onclick="selectCombo(3)">
-      Elegir combo
-    </button>
-  </div>
+        <h2 class="section-title">
+            🌭 Elegí tu combo
+        </h2>
 
-  <div class="card">
-    <h3>Combo 4 — Eventos</h3>
-    <p>Una propuesta para cumpleaños, reuniones y celebraciones.</p>
-    <button class="btn btn-primary" onclick="selectCombo(4)">
-      Consultar combo
-    </button>
-  </div>
+        <div id="comboList">
+
+            <div class="product-card"
+                 onclick="selectCombo(1)">
+
+                <h3>Combo 1</h3>
+
+                <p class="product-description">
+                    Contenido a definir.
+                </p>
+
+                <div class="product-bottom">
+                    <span class="price">$ —</span>
+                    <button class="add-button">
+                        ELEGIR
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="product-card"
+                 onclick="selectCombo(2)">
+
+                <h3>Combo 2</h3>
+
+                <p class="product-description">
+                    Contenido a definir.
+                </p>
+
+                <div class="product-bottom">
+                    <span class="price">$ —</span>
+                    <button class="add-button">
+                        ELEGIR
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="product-card"
+                 onclick="selectCombo(3)">
+
+                <h3>Combo 3</h3>
+
+                <p class="product-description">
+                    Contenido a definir.
+                </p>
+
+                <div class="product-bottom">
+                    <span class="price">$ —</span>
+                    <button class="add-button">
+                        ELEGIR
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="product-card"
+                 onclick="selectCombo(4)">
+
+                <h3>Combo 4</h3>
+
+                <p class="product-description">
+                    Contenido a definir.
+                </p>
+
+                <div class="product-bottom">
+                    <span class="price">$ —</span>
+                    <button class="add-button">
+                        ELEGIR
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 </section>
+
+<!-- ================= RESERVA ================= -->
 
 <section id="reservation" class="screen">
-  <button class="back" onclick="showScreen('events')">← Volver a eventos</button>
-  <h2>Reservar para un evento</h2>
-  <p>Completá tus datos para consultar disponibilidad.</p>
 
-  <div class="form-group">
-    <label for="reservationName">Nombre</label>
-    <input id="reservationName" type="text" placeholder="Tu nombre">
-  </div>
+    <div class="success">
 
-  <div class="form-group">
-    <label for="reservationPhone">Teléfono</label>
-    <input id="reservationPhone" type="tel" placeholder="Tu teléfono">
-  </div>
+        <div class="success-icon">🚚🌭</div>
 
-  <div class="form-group">
-    <label for="reservationDate">Fecha del evento</label>
-    <input id="reservationDate" type="date">
-  </div>
+        <h1>¡Reserva recibida!</h1>
 
-  <div class="form-group">
-    <label for="reservationGuests">Cantidad aproximada de personas</label>
-    <input id="reservationGuests" type="number" min="1" placeholder="Ej.: 30">
-  </div>
+        <p>
+            Recibimos tu solicitud de reserva.
+        </p>
 
-  <div class="form-group">
-    <label for="reservationType">Tipo de evento</label>
-    <select id="reservationType">
-      <option value="">Seleccioná una opción</option>
-      <option value="Cumpleaños">Cumpleaños</option>
-      <option value="Reunión familiar">Reunión familiar</option>
-      <option value="Evento empresarial">Evento empresarial</option>
-      <option value="Otro">Otro</option>
-    </select>
-  </div>
+        <div class="status">
+            🟡 Pendiente de confirmación
+        </div>
 
-  <div class="form-group">
-    <label for="reservationNotes">Detalles adicionales</label>
-    <textarea id="reservationNotes" placeholder="Contanos qué tenés pensado para tu evento"></textarea>
-  </div>
+        <div class="home-card"
+             style="text-align:left;margin-top:25px;">
 
-  <button class="btn btn-primary" onclick="startEventReservation()">
-    Enviar consulta
-  </button>
+            <h3>Tu evento</h3>
+
+            <p id="reservationSummary">
+            </p>
+
+        </div>
+
+        <button class="main-button"
+                onclick="showScreen('home')">
+            VOLVER AL INICIO
+        </button>
+
+    </div>
+
 </section>
+
+<!-- ================= MIS RESERVAS ================= -->
 
 <section id="profile" class="screen">
-  <h2>Mi cuenta</h2>
 
-  <div id="loggedOut">
-    <div class="card">
-      <h3>¡Registrate en El Club de los Panchos!</h3>
-      <p>Creá tu cuenta para consultar tus puntos, pedidos y recompensas.</p>
-      <button class="btn btn-primary" onclick="showScreen('register')">
-        Crear cuenta
-      </button>
-      <button class="btn btn-secondary" onclick="showScreen('login')">
-        Iniciar sesión
-      </button>
+    <div class="container">
+
+        <h2 class="section-title">
+            👤 Mi Club
+        </h2>
+
+        <div class="home-card">
+
+            <h3>🌭 Mis pedidos</h3>
+
+            <p>
+                Acá aparecerán tus pedidos.
+            </p>
+
+        </div>
+
+        <div class="home-card">
+
+            <h3>🚚 Mis reservas</h3>
+
+            <p>
+                Acá aparecerán tus eventos.
+            </p>
+
+        </div>
+
+        <div class="home-card">
+
+            <h3>💳 Medios de pago</h3>
+
+            <p>
+                Efectivo · Transferencia
+            </p>
+
+        </div>
+
+        <div class="home-card">
+
+            <h3>📱 Contacto</h3>
+
+            <p>
+                Instagram · WhatsApp
+            </p>
+
+        </div>
+
     </div>
-  </div>
-
-  <div id="loggedIn" style="display:none">
-    <div class="card">
-      <h3 id="profileName">Hola</h3>
-      <p id="profileEmail"></p>
-      <div class="points-number" id="profilePoints">0</div>
-      <p>Puntos acumulados</p>
-      <button class="btn btn-primary" onclick="showScreen('rewards')">
-        Ver recompensas
-      </button>
-    </div>
-
-    <div class="card">
-      <h3>Mis pedidos</h3>
-      <div id="profileOrders">
-        <p class="small">Todavía no tenés pedidos registrados.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Mis reservas</h3>
-      <div id="profileReservations">
-        <p class="small">Todavía no tenés reservas registradas.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Historial de puntos</h3>
-      <div id="profileHistory">
-        <p class="small">Todavía no tenés movimientos.</p>
-      </div>
-    </div>
-
-    <button class="btn btn-secondary" onclick="logoutClient()">
-      Cerrar sesión
-    </button>
-  </div>
 </section>
 
-<section id="register" class="screen">
-  <button class="back" onclick="showScreen('profile')">← Volver</button>
-  <h2>Crear cuenta</h2>
-
-  <div class="form-group">
-    <label for="registerName">Nombre completo</label>
-    <input id="registerName" type="text" placeholder="Tu nombre">
-  </div>
-
-  <div class="form-group">
-    <label for="registerEmail">Correo electrónico</label>
-    <input id="registerEmail" type="email" placeholder="nombre@correo.com">
-  </div>
-
-  <div class="form-group">
-    <label for="registerCi">Cédula de identidad</label>
-    <input id="registerCi" type="text" placeholder="Tu cédula">
-  </div>
-
-  <div class="form-group">
-    <label for="registerPhone">Teléfono</label>
-    <input id="registerPhone" type="tel" placeholder="Tu teléfono">
-  </div>
-
-  <div class="form-group">
-    <label for="registerPassword">Contraseña</label>
-    <input id="registerPassword" type="password" placeholder="Creá una contraseña">
-  </div>
-
-  <button class="btn btn-primary" onclick="registerClient()">
-    Registrarme
-  </button>
-
-  <p class="small">¿Ya tenés cuenta?
-    <button class="inline-button" onclick="showScreen('login')">
-      Iniciá sesión
-    </button>
-  </p>
-</section>
-
-<section id="login" class="screen">
-  <button class="back" onclick="showScreen('profile')">← Volver</button>
-  <h2>Iniciar sesión</h2>
-
-  <div class="form-group">
-    <label for="loginEmail">Correo electrónico</label>
-    <input id="loginEmail" type="email" placeholder="nombre@correo.com">
-  </div>
-
-  <div class="form-group">
-    <label for="loginPassword">Contraseña</label>
-    <input id="loginPassword" type="password" placeholder="Tu contraseña">
-  </div>
-
-  <button class="btn btn-primary" onclick="loginClient()">
-    Iniciar sesión
-  </button>
-
-  <p class="small">¿Todavía no tenés cuenta?
-    <button class="inline-button" onclick="showScreen('register')">
-      Registrate
-    </button>
-  </p>
-</section>
-
-<section id="rewards" class="screen">
-  <button class="back" onclick="showScreen('profile')">← Volver a mi cuenta</button>
-  <h2>Mis recompensas</h2>
-
-  <div class="card">
-    <p>Acumulá puntos con tus compras y canjealos por beneficios.</p>
-    <div class="points-number" id="rewardsPoints">0 puntos</div>
-    <div class="progress-track">
-      <div class="progress-fill" id="rewardsProgress" style="width:0%"></div>
-    </div>
-    <p class="small" id="rewardsProgressText">Sumá puntos con tus compras.</p>
-  </div>
-
-  <div class="reward-card">
-    <div class="reward-icon">🌭</div>
-    <div style="flex:1">
-      <h3>Pancho clásico</h3>
-      <p class="small">Canjeá tus puntos por un pancho clásico.</p>
-      <span class="points-pill">100 puntos</span>
-    </div>
-    <button class="btn btn-primary" onclick="redeemReward(100, 'Pancho clásico')">
-      Canjear
-    </button>
-  </div>
-
-  <div class="reward-card">
-    <div class="reward-icon">🍟</div>
-    <div style="flex:1">
-      <h3>Porción de papas</h3>
-      <p class="small">Disfrutá una porción de papas.</p>
-      <span class="points-pill">200 puntos</span>
-    </div>
-    <button class="btn btn-primary" onclick="redeemReward(200, 'Porción de papas')">
-      Canjear
-    </button>
-  </div>
-
-  <div class="reward-card">
-    <div class="reward-icon">🎁</div>
-    <div style="flex:1">
-      <h3>Combo especial</h3>
-      <p class="small">Canjeá puntos por un combo especial.</p>
-      <span class="points-pill">500 puntos</span>
-    </div>
-    <button class="btn btn-primary" onclick="redeemReward(500, 'Combo especial')">
-      Canjear
-    </button>
-  </div>
-
-  <p class="notice">
-    Los canjes quedan sujetos a confirmación del comercio.
-  </p>
-</section>
+<!-- ================= ADMIN ================= -->
 
 <section id="admin" class="screen">
-  <h2>Panel de administración</h2>
-  <p class="small">Resumen de la información registrada en este dispositivo.</p>
 
-  <div class="grid">
-    <div class="admin-stat">
-      <strong id="adminClients">0</strong>
-      <span class="small">Clientes</span>
+    <div class="container">
+
+        <h2 class="section-title">
+            🔐 Administración
+        </h2>
+
+        <div class="admin-stat">
+
+            <div class="stat">
+                <strong>12</strong>
+                Pedidos
+            </div>
+
+            <div class="stat">
+                <strong>1</strong>
+                Evento
+            </div>
+
+            <div class="stat">
+                <strong>$ —</strong>
+                Ventas
+            </div>
+
+        </div>
+
+        <h3 style="margin-bottom:12px;">
+            🌭 Pedidos pendientes
+        </h3>
+
+        <div class="admin-card">
+
+            <h3>Pedido #024</h3>
+
+            <p>
+                8 productos · 21:30
+            </p>
+
+            <span class="status">
+                🟡 Preparando
+            </span>
+
+        </div>
+
+        <h3 style="margin:25px 0 12px;">
+            🚚 Próximos eventos
+        </h3>
+
+        <div class="admin-card">
+
+            <h3>20 de octubre</h3>
+
+            <p>
+                🎂 Cumpleaños · 40 personas
+            </p>
+
+            <p>
+                🕐 20:30
+            </p>
+
+            <span class="status">
+                🟢 Confirmado
+            </span>
+
+        </div>
+
+        <button class="secondary-button"
+                onclick="showScreen('calendar')">
+            📅 VER CALENDARIO
+        </button>
+
     </div>
-    <div class="admin-stat">
-      <strong id="adminOrders">0</strong>
-      <span class="small">Pedidos</span>
-    </div>
-    <div class="admin-stat">
-      <strong id="adminReservations">0</strong>
-      <span class="small">Reservas</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>Clientes registrados</h3>
-    <div id="adminClientsList"></div>
-  </div>
-
-  <div class="card">
-    <h3>Pedidos registrados</h3>
-    <div id="adminOrdersList"></div>
-  </div>
-
-  <div class="card">
-    <h3>Reservas registradas</h3>
-    <div id="adminReservationsList"></div>
-  </div>
-
-  <button class="btn btn-secondary" onclick="renderAdmin()">
-    Actualizar información
-  </button>
 </section>
+
+<!-- ================= NAV ================= -->
+
+<nav class="bottom-nav">
+
+    <button class="nav-button active"
+            onclick="showScreen('home')">
+
+        <span class="nav-icon">🏠</span>
+        Inicio
+
+    </button>
+
+    <button class="nav-button"
+            onclick="showScreen('menu')">
+
+        <span class="nav-icon">🌭</span>
+        Menú
+
+    </button>
+
+    <button class="nav-button"
+            onclick="showScreen('events')">
+
+        <span class="nav-icon">🚚</span>
+        Eventos
+
+    </button>
+
+    <button class="nav-button"
+            onclick="showScreen('cart')">
+
+        <span class="nav-icon">🛒</span>
+        Carrito
+
+    </button>
+
+    <button class="nav-button"
+            onclick="showScreen('profile')">
+
+        <span class="nav-icon">👤</span>
+        Mi Club
+
+    </button>
+
+</nav>
 
 </div>
 
-<nav class="bottom-nav">
-  <button class="nav-button active" onclick="showScreen('home')">
-    <span class="nav-icon">⌂</span>
-    Inicio
-  </button>
-  <button class="nav-button" onclick="showScreen('menu')">
-    <span class="nav-icon">🌭</span>
-    Menú
-  </button>
-  <button class="nav-button" onclick="showScreen('events')">
-    <span class="nav-icon">📅</span>
-    Eventos
-  </button>
-  <button class="nav-button" onclick="showScreen('cart')">
-    <span class="nav-icon">🛒</span>
-    Carrito
-  </button>
-  <button class="nav-button" onclick="showScreen('profile')">
-    <span class="nav-icon">👤</span>
-    Mi cuenta
-  </button>
-</nav>
-
 <script>
 
-const DB_KEY = "elClubDeLosPanchosDB";
+/* ================= VARIABLES ================= */
 
-let db = loadDB();
-let currentClient = null;
 let cart = [];
-let selectedPayment = "Efectivo";
-let calendarDate = new Date();
-let selectedDate = "";
-let selectedEvent = null;
-let selectedComboNumber = null;
 
-function loadDB() {
-  try {
-    const saved = localStorage.getItem(DB_KEY);
-    return saved ? JSON.parse(saved) : {
-      clients: [],
-      orders: [],
-      reservations: [],
-      history: []
-    };
-  } catch (error) {
-    return {
-      clients: [],
-      orders: [],
-      reservations: [],
-      history: []
-    };
-  }
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+
+let selectedDate = null;
+let selectedCombo = null;
+
+/*
+    FECHAS OCUPADAS
+
+    Acá ustedes podrán agregar las fechas
+    que ya tengan reservadas.
+
+    Formato:
+    "2026-10-20"
+*/
+
+let occupiedDates = [
+    "2026-10-20"
+];
+
+/* ================= NAVEGACIÓN ================= */
+
+function showScreen(id) {
+
+    document.querySelectorAll(".screen")
+        .forEach(screen => {
+            screen.classList.remove("active");
+        });
+
+    const screen = document.getElementById(id);
+
+    if (screen) {
+        screen.classList.add("active");
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
-function saveDB() {
-  localStorage.setItem(DB_KEY, JSON.stringify(db));
-}
+/* ================= CARRITO ================= */
 
-function normalizeCi(value) {
-  return String(value || "").replace(/\D/g, "");
-}
+function addToCart(product) {
 
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[char]);
-}
-
-function showScreen(screenId) {
-  document.querySelectorAll(".screen").forEach(screen => {
-    screen.classList.remove("active");
-    screen.style.display = "none";
-  });
-
-  const target = document.getElementById(screenId);
-  if (target) {
-    target.classList.add("active");
-    target.style.display = "block";
-  }
-
-  document.querySelectorAll(".nav-button").forEach(button => {
-    button.classList.toggle(
-      "active",
-      button.getAttribute("onclick")?.includes(`'${screenId}'`)
+    const existing = cart.find(
+        item => item.name === product
     );
-  });
 
-  if (screenId === "cart") renderCart();
-  if (screenId === "events") renderCalendar();
-  if (screenId === "profile") renderProfile();
-  if (screenId === "rewards") renderRewards();
-  if (screenId === "admin") renderAdmin();
+    if (existing) {
+        existing.quantity++;
+    } else {
+        cart.push({
+            name: product,
+            quantity: 1
+        });
+    }
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
+    updateCart();
 
-function addToCart(name, price) {
-  price = Number(price);
-  if (!name || !Number.isFinite(price) || price < 0) return;
-
-  const existing = cart.find(item => item.name === name);
-
-  if (existing) {
-    existing.quantity++;
-  } else {
-    cart.push({ name, price, quantity: 1 });
-  }
-
-  updateCart();
-  alert(`${name} se agregó al carrito.`);
+    alert(product + " agregado al carrito 🌭");
 }
 
 function updateCart() {
-  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const countElement = document.getElementById("cartCount");
 
-  if (countElement) countElement.textContent = count;
+    const count = cart.reduce(
+        (total, item) => total + item.quantity,
+        0
+    );
 
-  renderCart();
+    document.getElementById("cartCount")
+        .textContent = count;
+
+    renderCart();
 }
 
 function renderCart() {
-  const container = document.getElementById("cartItems");
-  const empty = document.getElementById("emptyCart");
-  const totalElement = document.getElementById("cartTotal");
 
-  if (!container) return;
+    const container =
+        document.getElementById("cartItems");
 
-  container.innerHTML = "";
+    const empty =
+        document.getElementById("emptyCart");
 
-  if (cart.length === 0) {
-    if (empty) empty.style.display = "block";
-    if (totalElement) totalElement.textContent = "$ 0";
-    return;
-  }
+    const total =
+        document.getElementById("cartTotal");
 
-  if (empty) empty.style.display = "none";
+    if (cart.length === 0) {
 
-  let total = 0;
+        container.innerHTML = "";
 
-  cart.forEach((item, index) => {
-    total += item.price * item.quantity;
+        empty.style.display = "block";
+        total.style.display = "none";
 
-    const row = document.createElement("div");
-    row.className = "cart-item";
+        return;
+    }
 
-    row.innerHTML = `
-      <div>
-        <strong>${escapeHTML(item.name)}</strong>
-        <p>$ ${item.price} c/u</p>
-      </div>
-      <div>
-        <button onclick="changeQuantity(${index}, -1)">−</button>
-        <span>${item.quantity}</span>
-        <button onclick="changeQuantity(${index}, 1)">+</button>
-      </div>
-      <strong>$ ${item.price * item.quantity}</strong>
-    `;
+    empty.style.display = "none";
+    total.style.display = "block";
 
-    container.appendChild(row);
-  });
+    container.innerHTML = cart.map(
+        (item, index) => `
 
-  if (totalElement) {
-    totalElement.textContent = `$ ${total}`;
-  }
+        <div class="cart-item">
+
+            <div>
+                <strong>${item.name}</strong>
+
+                <p style="
+                    color:#806b5d;
+                    font-size:12px;
+                    margin-top:4px;
+                ">
+                    Precio: $ —
+                </p>
+            </div>
+
+            <div class="quantity">
+
+                <button onclick="changeQuantity(${index}, -1)">
+                    −
+                </button>
+
+                <strong>
+                    ${item.quantity}
+                </strong>
+
+                <button onclick="changeQuantity(${index}, 1)">
+                    +
+                </button>
+
+            </div>
+
+        </div>
+    `
+    ).join("");
 }
 
 function changeQuantity(index, amount) {
-  if (!cart[index]) return;
 
-  cart[index].quantity += amount;
+    cart[index].quantity += amount;
 
-  if (cart[index].quantity <= 0) {
-    cart.splice(index, 1);
-  }
-
-  updateCart();
-}
-
-function selectChoice(element, group) {
-  const parent = element.parentElement;
-
-  parent.querySelectorAll(".choice").forEach(choice => {
-    choice.classList.remove("selected");
-  });
-
-  element.classList.add("selected");
-
-  if (group === "payment") {
-    selectedPayment = element.dataset.payment || element.textContent.trim();
-  }
-}
-
-function confirmOrder() {
-  if (cart.length === 0) {
-    alert("El carrito está vacío.");
-    showScreen("menu");
-    return;
-  }
-
-  const name = document.getElementById("orderName").value.trim();
-  const phone = document.getElementById("orderPhone").value.trim();
-  const date = document.getElementById("pickupDate").value;
-  const time = document.getElementById("pickupTime").value;
-
-  if (!name || !phone || !date || !time) {
-    alert("Completá todos los datos del pedido.");
-    return;
-  }
-
-  const order = {
-    id: Date.now(),
-    name,
-    phone,
-    date,
-    time,
-    payment: selectedPayment,
-    items: cart.map(item => ({ ...item })),
-    total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
-    status: "Pendiente",
-    clientEmail: currentClient?.email || "",
-    createdAt: new Date().toISOString()
-  };
-
-  db.orders.push(order);
-
-  if (currentClient) {
-    currentClient.orders = currentClient.orders || [];
-    currentClient.orders.push(order.id);
-  }
-
-  saveDB();
-
-  cart = [];
-  updateCart();
-
-  showScreen("orderSuccess");
-}
-
-function startEventReservation() {
-  const name = document.getElementById("reservationName").value.trim();
-  const phone = document.getElementById("reservationPhone").value.trim();
-  const date = document.getElementById("reservationDate").value;
-  const guests = Number(document.getElementById("reservationGuests").value);
-  const type = document.getElementById("reservationType").value;
-  const notes = document.getElementById("reservationNotes").value.trim();
-
-  if (!name || !phone || !date || guests < 1 || !type) {
-    alert("Completá tu nombre, teléfono, fecha, cantidad de personas y tipo de evento.");
-    return;
-  }
-
-  const reservation = {
-    id: Date.now(),
-    name,
-    phone,
-    date,
-    guests,
-    type,
-    notes,
-    status: "Pendiente de confirmación",
-    clientEmail: currentClient?.email || "",
-    createdAt: new Date().toISOString()
-  };
-
-  db.reservations.push(reservation);
-  saveDB();
-
-  alert("Tu consulta quedó registrada. La fecha todavía debe ser confirmada por el comercio.");
-  showScreen("profile");
-}
-
-function renderCalendar() {
-  const title = document.getElementById("calendarTitle");
-  const days = document.getElementById("calendarDays");
-
-  if (!title || !days) return;
-
-  const year = calendarDate.getFullYear();
-  const month = calendarDate.getMonth();
-
-  title.textContent = new Intl.DateTimeFormat("es-UY", {
-    month: "long",
-    year: "numeric"
-  }).format(calendarDate);
-
-  days.innerHTML = "";
-
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-  const offset = (firstDay.getDay() + 6) % 7;
-
-  for (let i = 0; i < offset; i++) {
-    const blank = document.createElement("div");
-    days.appendChild(blank);
-  }
-
-  for (let day = 1; day <= lastDay.getDate(); day++) {
-    const dateString = [
-      year,
-      String(month + 1).padStart(2, "0"),
-      String(day).padStart(2, "0")
-    ].join("-");
-
-    const cell = document.createElement("div");
-    cell.className = "day";
-    cell.textContent = day;
-
-    if (dateString === selectedDate) {
-      cell.classList.add("selected");
+    if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
     }
 
-    cell.onclick = () => selectDate(dateString);
-    days.appendChild(cell);
-  }
+    updateCart();
+}
+
+/* ================= PEDIDO ================= */
+
+function confirmOrder() {
+
+    const name =
+        document.getElementById("orderName").value;
+
+    const date =
+        document.getElementById("pickupDate").value;
+
+    const time =
+        document.getElementById("pickupTime").value;
+
+    if (!name || !date || !time) {
+
+        alert(
+            "Completá tu nombre, fecha y hora."
+        );
+
+        return;
+    }
+
+    showScreen("orderSuccess");
+}
+
+/* ================= CALENDARIO ================= */
+
+function renderCalendar() {
+
+    const title =
+        document.getElementById("calendarTitle");
+
+    const daysContainer =
+        document.getElementById("calendarDays");
+
+    const monthNames = [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+    ];
+
+    title.textContent =
+        monthNames[currentMonth]
+        + " "
+        + currentYear;
+
+    const firstDay =
+        new Date(
+            currentYear,
+            currentMonth,
+            1
+        ).getDay();
+
+    const daysInMonth =
+        new Date(
+            currentYear,
+            currentMonth + 1,
+            0
+        ).getDate();
+
+    /*
+        JavaScript empieza la semana
+        en domingo. Lo convertimos para
+        que empiece en lunes.
+    */
+
+    let startingDay = firstDay - 1;
+
+    if (startingDay < 0) {
+        startingDay = 6;
+    }
+
+    let html = "";
+
+    for (let i = 0; i < startingDay; i++) {
+        html += "<div></div>";
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+
+        const month =
+            String(currentMonth + 1).padStart(2, "0");
+
+        const dayFormatted =
+            String(day).padStart(2, "0");
+
+        const dateString =
+            `${currentYear}-${month}-${dayFormatted}`;
+
+        const occupied =
+            occupiedDates.includes(dateString);
+
+        if (occupied) {
+
+            html += `
+                <div class="day occupied">
+                    ${day}
+                </div>
+            `;
+
+        } else {
+
+            html += `
+                <div
+                    class="day available"
+                    onclick="selectDate('${dateString}')"
+                >
+                    ${day}
+                </div>
+            `;
+        }
+    }
+
+    daysContainer.innerHTML = html;
 }
 
 function changeMonth(amount) {
-  calendarDate.setMonth(calendarDate.getMonth() + amount);
-  renderCalendar();
+
+    currentMonth += amount;
+
+    if (currentMonth < 0) {
+
+        currentMonth = 11;
+        currentYear--;
+
+    }
+
+    if (currentMonth > 11) {
+
+        currentMonth = 0;
+        currentYear++;
+
+    }
+
+    renderCalendar();
 }
 
 function selectDate(date) {
-  selectedDate = date;
-  selectedEvent = date;
 
-  renderCalendar();
+    selectedDate = date;
 
-  const container = document.getElementById("eventData");
+    const box =
+        document.getElementById(
+            "selectedDateBox"
+        );
 
-  if (container) {
-    container.innerHTML = `
-      <h3>Fecha seleccionada</h3>
-      <p>${escapeHTML(date)}</p>
-      <p>Consultá la disponibilidad antes de dar por confirmada la fecha.</p>
-      <button class="btn btn-primary"
-        onclick="prepareReservation('${escapeHTML(date)}')">
-        Consultar reserva
-      </button>
-    `;
-  }
+    const text =
+        document.getElementById(
+            "selectedDateText"
+        );
+
+    const dateObject =
+        new Date(date + "T12:00:00");
+
+    text.textContent =
+        dateObject.toLocaleDateString(
+            "es-UY",
+            {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+    box.style.display = "block";
 }
 
-function prepareReservation(date) {
-  showScreen("reservation");
+/* ================= EVENTOS ================= */
 
-  const field = document.getElementById("reservationDate");
-  if (field) field.value = date;
+function startEventReservation() {
+
+    showScreen("events");
+
 }
 
-function selectEvent(date) {
-  selectDate(date);
+function selectEvent(element) {
+
+    document
+        .querySelectorAll("#eventData .choice")
+        .forEach(choice => {
+            choice.classList.remove("selected");
+        });
+
+    element.classList.add("selected");
 }
 
-function renderCombos() {
-  showScreen("combos");
+function selectChoice(element) {
+
+    element.parentElement
+        .querySelectorAll(".choice")
+        .forEach(choice => {
+            choice.classList.remove("selected");
+        });
+
+    element.classList.add("selected");
 }
 
 function selectCombo(number) {
-  selectedComboNumber = number;
 
-  if (number === 4) {
+    selectedCombo = number;
+
+    const people =
+        document.getElementById(
+            "eventPeople"
+        ).value || "—";
+
+    document.getElementById(
+        "reservationSummary"
+    ).innerHTML = `
+
+        📅 <strong>${formatDate(selectedDate)}</strong><br><br>
+
+        👥 <strong>${people}</strong> personas<br><br>
+
+        🌭 <strong>Combo ${number}</strong><br><br>
+
+        💰 Total: <strong>$ —</strong><br><br>
+
+        🟡 Pendiente de confirmación
+
+    `;
+
     showScreen("reservation");
-    return;
-  }
-
-  showScreen("menu");
-  alert(`Elegiste consultar el combo ${number}. Agregá los productos disponibles al carrito para hacer tu pedido.`);
 }
 
 function formatDate(date) {
-  if (!date) return "";
 
-  const parsed = new Date(`${date}T12:00:00`);
+    if (!date) return "No seleccionada";
 
-  if (Number.isNaN(parsed.getTime())) return date;
+    const object =
+        new Date(date + "T12:00:00");
 
-  return parsed.toLocaleDateString("es-UY");
+    return object.toLocaleDateString(
+        "es-UY",
+        {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }
+    );
 }
 
-function registerClient() {
-  const name = document.getElementById("registerName").value.trim();
-  const email = document.getElementById("registerEmail").value.trim().toLowerCase();
-  const ci = normalizeCi(document.getElementById("registerCi").value);
-  const phone = document.getElementById("registerPhone").value.trim();
-  const password = document.getElementById("registerPassword").value;
+/* ================= INICIALIZAR ================= */
 
-  if (!name || !email || !ci || !phone || !password) {
-    alert("Completá todos los campos.");
-    return;
-  }
+renderCalendar();
+updateCart();
 
-  if (!email.includes("@")) {
-    alert("Ingresá un correo electrónico válido.");
-    return;
-  }
-
-  if (db.clients.some(client => client.email === email)) {
-    alert("Ya existe una cuenta con ese correo.");
-    return;
-  }
-
-  if (db.clients.some(client => client.ci === ci)) {
-    alert("Ya existe una cuenta con esa cédula.");
-    return;
-  }
-
-  const client = {
-    id: Date.now(),
-    name,
-    email,
-    ci,
-    phone,
-    password,
-    points: 0,
-    orders: [],
-    reservations: [],
-    history: []
-  };
-
-  db.clients.push(client);
-  saveDB();
-
-  currentClient = client;
-  alert("Tu cuenta quedó creada.");
-  showScreen("profile");
-}
-
-function loginClient() {
-  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
-  const password = document.getElementById("loginPassword").value;
-
-  const client = db.clients.find(item =>
-    item.email === email && item.password === password
-  );
-
-  if (!client) {
-    alert("Correo o contraseña incorrectos.");
-    return;
-  }
-
-  currentClient = client;
-  alert("Iniciaste sesión correctamente.");
-  showScreen("profile");
-}
-
-function logoutClient() {
-  currentClient = null;
-  showScreen("profile");
-}
-
-function renderProfile() {
-  const loggedOut = document.getElementById("loggedOut");
-  const loggedIn = document.getElementById("loggedIn");
-
-  if (!loggedOut || !loggedIn) return;
-
-  loggedOut.style.display = currentClient ? "none" : "block";
-  loggedIn.style.display = currentClient ? "block" : "none";
-
-  if (!currentClient) return;
-
-  document.getElementById("profileName").textContent =
-    `Hola, ${currentClient.name}`;
-
-  document.getElementById("profileEmail").textContent =
-    currentClient.email;
-
-  document.getElementById("profilePoints").textContent =
-    currentClient.points || 0;
-
-  const orders = db.orders.filter(order =>
-    order.clientEmail === currentClient.email
-  );
-
-  const reservations = db.reservations.filter(reservation =>
-    reservation.clientEmail === currentClient.email
-  );
-
-  document.getElementById("profileOrders").innerHTML =
-    orders.length
-      ? orders.map(order => `
-          <div class="history-item">
-            <strong>Pedido #${order.id}</strong>
-            <p>${formatDate(order.date)} · $ ${order.total}</p>
-            <span class="status">${escapeHTML(order.status)}</span>
-          </div>
-        `).join("")
-      : '<p class="small">Todavía no tenés pedidos registrados.</p>';
-
-  document.getElementById("profileReservations").innerHTML =
-    reservations.length
-      ? reservations.map(reservation => `
-          <div class="history-item">
-            <strong>${escapeHTML(reservation.type)}</strong>
-            <p>${formatDate(reservation.date)} · ${reservation.guests} personas</p>
-            <span class="status">${escapeHTML(reservation.status)}</span>
-          </div>
-        `).join("")
-      : '<p class="small">Todavía no tenés reservas registradas.</p>';
-
-  document.getElementById("profileHistory").innerHTML =
-    (currentClient.history || []).length
-      ? currentClient.history.map(entry => `
-          <div class="history-item">
-            ${escapeHTML(entry.description)}
-            <span> ${entry.points > 0 ? "+" : ""}${entry.points} puntos</span>
-          </div>
-        `).join("")
-      : '<p class="small">Todavía no tenés movimientos.</p>';
-}
-
-function renderRewards() {
-  const pointsElement = document.getElementById("rewardsPoints");
-  const progress = document.getElementById("rewardsProgress");
-  const text = document.getElementById("rewardsProgressText");
-
-  const points = currentClient ? Number(currentClient.points || 0) : 0;
-
-  if (pointsElement) pointsElement.textContent = `${points} puntos`;
-
-  if (progress) {
-    progress.style.width = `${Math.min(points / 500 * 100, 100)}%`;
-  }
-
-  if (text) {
-    text.textContent = currentClient
-      ? `Te faltan ${Math.max(0, 500 - points)} puntos para el combo especial.`
-      : "Iniciá sesión para consultar tus puntos.";
-  }
-}
-
-function redeemReward(cost, rewardName) {
-  if (!currentClient) {
-    alert("Iniciá sesión para canjear una recompensa.");
-    showScreen("login");
-    return;
-  }
-
-  if (currentClient.points < cost) {
-    alert("Todavía no tenés puntos suficientes para este canje.");
-    return;
-  }
-
-  if (!confirm(`¿Querés canjear ${cost} puntos por ${rewardName}?`)) {
-    return;
-  }
-
-  currentClient.points -= cost;
-  currentClient.history = currentClient.history || [];
-
-  currentClient.history.push({
-    description: `Canje: ${rewardName}`,
-    points: -cost,
-    date: new Date().toISOString()
-  });
-
-  saveDB();
-  renderRewards();
-  renderProfile();
-
-  alert("Canje registrado. El comercio debe confirmar la entrega de la recompensa.");
-}
-
-function registerPurchase(clientEmail, amount) {
-  const client = db.clients.find(item => item.email === clientEmail);
-  if (!client) return;
-
-  const earned = Math.floor(Number(amount) / 100);
-
-  client.points = Number(client.points || 0) + earned;
-  client.history = client.history || [];
-
-  client.history.push({
-    description: "Puntos por compra",
-    points: earned,
-    date: new Date().toISOString()
-  });
-
-  saveDB();
-}
-
-function renderAdmin() {
-  const clientsCount = document.getElementById("adminClients");
-  const ordersCount = document.getElementById("adminOrders");
-  const reservationsCount = document.getElementById("adminReservations");
-
-  if (clientsCount) clientsCount.textContent = db.clients.length;
-  if (ordersCount) ordersCount.textContent = db.orders.length;
-  if (reservationsCount) reservationsCount.textContent = db.reservations.length;
-
-  const clientsList = document.getElementById("adminClientsList");
-  const ordersList = document.getElementById("adminOrdersList");
-  const reservationsList = document.getElementById("adminReservationsList");
-
-  if (clientsList) {
-    clientsList.innerHTML = db.clients.length
-      ? db.clients.map(client => `
-          <div class="history-item">
-            <strong>${escapeHTML(client.name)}</strong>
-            <p>${escapeHTML(client.email)}</p>
-            <p class="small">Puntos: ${Number(client.points || 0)}</p>
-          </div>
-        `).join("")
-      : "<p>No hay clientes registrados.</p>";
-  }
-
-  if (ordersList) {
-    ordersList.innerHTML = db.orders.length
-      ? db.orders.map(order => `
-          <div class="history-item">
-            <strong>Pedido #${order.id}</strong>
-            <p>${escapeHTML(order.name)} · $ ${order.total}</p>
-            <p>${formatDate(order.date)} · ${escapeHTML(order.status)}</p>
-          </div>
-        `).join("")
-      : "<p>No hay pedidos registrados.</p>";
-  }
-
-  if (reservationsList) {
-    reservationsList.innerHTML = db.reservations.length
-      ? db.reservations.map(reservation => `
-          <div class="history-item">
-            <strong>${escapeHTML(reservation.name)}</strong>
-            <p>${escapeHTML(reservation.type)} · ${formatDate(reservation.date)}</p>
-            <p>${reservation.guests} personas · ${escapeHTML(reservation.status)}</p>
-          </div>
-        `).join("")
-      : "<p>No hay reservas registradas.</p>";
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  updateCart();
-  renderCalendar();
-  renderProfile();
-  renderRewards();
-
-  const today = new Date();
-  const dateField = document.getElementById("pickupDate");
-
-  if (dateField) {
-    dateField.min = [
-      today.getFullYear(),
-      String(today.getMonth() + 1).padStart(2, "0"),
-      String(today.getDate()).padStart(2, "0")
-    ].join("-");
-  }
-
-  showScreen("home");
-});
 </script>
+
 </body>
 </html>
+

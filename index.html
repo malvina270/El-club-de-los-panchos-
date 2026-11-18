@@ -2,799 +2,908 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>El Club de los Panchos</title>
-
-  <style>
-    :root {
-      --rojo: #a52d24;
-      --rojo-oscuro: #76251e;
-      --crema: #fff3df;
-      --amarillo: #f3bd57;
-      --marron: #38251d;
-      --blanco: #fffdf8;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: var(--crema);
-      color: var(--marron);
-    }
-
-    header {
-      background: var(--rojo);
-      color: white;
-      padding: 18px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .logo {
-      font-size: 23px;
-      font-weight: bold;
-    }
-
-    nav {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      color: var(--amarillo);
-    }
-
-    .propuesta {
-      background: var(--amarillo);
-      color: var(--marron);
-      text-align: center;
-      padding: 9px;
-      font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-
-    /* INICIO */
-
-    .hero {
-      min-height: 440px;
-      padding: 75px 8%;
-      display: flex;
-      align-items: center;
-      background:
-        linear-gradient(90deg, rgba(45,25,15,.88), rgba(45,25,15,.25)),
-        url("https://images.unsplash.com/photo-1612392062631-94dd858cba88?auto=format&fit=crop&w=1600&q=85");
-      background-size: cover;
-      background-position: center;
-      color: white;
-    }
-
-    .hero-content {
-      max-width: 600px;
-    }
-
-    .hero h1 {
-      font-size: clamp(38px, 6vw, 65px);
-      margin-bottom: 18px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      line-height: 1.6;
-      margin-bottom: 25px;
-    }
-
-    .boton {
-      display: inline-block;
-      background: var(--amarillo);
-      color: var(--marron);
-      padding: 13px 23px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .boton:hover {
-      background: #e6a936;
-      transform: translateY(-2px);
-    }
-
-    /* SECCIONES GENERALES */
-
-    section {
-      padding: 65px 8%;
-      scroll-margin-top: 20px;
-    }
-
-    .titulo {
-      text-align: center;
-      margin-bottom: 38px;
-    }
-
-    .titulo h2 {
-      color: var(--rojo);
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .titulo p {
-      color: #70594b;
-      line-height: 1.6;
-    }
-
-    /* PRESENTACIÓN */
-
-    .presentacion {
-      max-width: 850px;
-      margin: auto;
-      text-align: center;
-      font-size: 17px;
-      line-height: 1.8;
-    }
-
-    .tarjetas {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 22px;
-    }
-
-    .tarjeta {
-      background: var(--blanco);
-      padding: 28px;
-      border-radius: 15px;
-      box-shadow: 0 5px 18px rgba(60,35,20,.08);
-    }
-
-    .tarjeta h3 {
-      color: var(--rojo);
-      font-size: 21px;
-      margin-bottom: 13px;
-    }
-
-    .tarjeta p {
-      line-height: 1.7;
-    }
-
-    /* VALORES */
-
-    .valores {
-      background: var(--rojo);
-      color: white;
-    }
-
-    .valores .titulo h2,
-    .valores .titulo p {
-      color: white;
-    }
-
-    .valor {
-      background: rgba(255,255,255,.13);
-      padding: 23px;
-      border-radius: 13px;
-      text-align: center;
-      font-size: 17px;
-      font-weight: bold;
-    }
-
-    /* MENÚ */
-
-    .menu {
-      background: #f9e8ca;
-    }
-
-    .producto {
-      background: var(--blanco);
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 5px 18px rgba(60,35,20,.10);
-      transition: .25s;
-    }
-
-    .producto:hover {
-      transform: translateY(-5px);
-    }
-
-    .producto img {
-      width: 100%;
-      height: 230px;
-      object-fit: cover;
-      display: block;
-      background: #ead5b8;
-    }
-
-    .producto-info {
-      padding: 21px;
-    }
-
-    .producto h3 {
-      color: var(--rojo);
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .producto p {
-      font-size: 14px;
-      line-height: 1.6;
-      min-height: 65px;
-    }
-
-    .precio {
-      display: block;
-      color: var(--rojo);
-      font-size: 24px;
-      font-weight: bold;
-      margin: 14px 0;
-    }
-
-    .producto button {
-      width: 100%;
-    }
-
-    .nota {
-      text-align: center;
-      margin-top: 25px;
-      font-size: 13px;
-      color: #70594b;
-    }
-
-    /* EVENTOS */
-
-    .eventos {
-      background: var(--blanco);
-    }
-
-    .evento-contenido {
-      max-width: 850px;
-      margin: auto;
-      text-align: center;
-      line-height: 1.8;
-    }
-
-    .evento-contenido p {
-      margin-bottom: 25px;
-      font-size: 17px;
-    }
-
-    .evento-destacados {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 18px;
-      margin: 30px 0;
-    }
-
-    .evento-destacado {
-      background: var(--crema);
-      padding: 22px;
-      border-radius: 12px;
-      font-weight: bold;
-      color: var(--rojo);
-    }
-
-    .evento-destacado span {
-      display: block;
-      font-size: 30px;
-      margin-bottom: 10px;
-    }
-
-    /* MI CLUB */
-
-    .club {
-      background: var(--amarillo);
-      text-align: center;
-    }
-
-    .club h2 {
-      font-size: 32px;
-      margin-bottom: 15px;
-    }
-
-    .club p {
-      max-width: 680px;
-      margin: 0 auto 20px;
-      line-height: 1.8;
-      font-size: 17px;
-    }
-
-    .club-beneficio {
-      display: inline-block;
-      background: var(--rojo);
-      color: white;
-      padding: 15px 25px;
-      border-radius: 12px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    /* FOOTER */
-
-    footer {
-      background: var(--marron);
-      color: white;
-      text-align: center;
-      padding: 35px 15px;
-      line-height: 1.8;
-    }
-
-    footer h3 {
-      font-size: 23px;
-      margin-bottom: 8px;
-    }
-
-    footer small {
-      color: #e7c9a6;
-    }
-
-    /* CELULARES */
-
-    @media (max-width: 650px) {
-      header {
-        justify-content: center;
-        text-align: center;
-      }
-
-      nav {
-        justify-content: center;
-        gap: 13px;
-      }
-
-      nav a {
-        font-size: 13px;
-      }
-
-      .hero {
-        min-height: 390px;
-        padding: 55px 7%;
-      }
-
-      section {
-        padding: 50px 6%;
-      }
-
-      .producto img {
-        height: 220px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Club de los Panchos</title>
+
+<style>
+:root {
+  --rojo: #a52d24;
+  --rojo-oscuro: #76251e;
+  --crema: #fff3df;
+  --amarillo: #f3bd57;
+  --marron: #38251d;
+  --blanco: #fffdf8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--crema);
+  color: var(--marron);
+}
+
+header {
+  background: var(--rojo);
+  color: white;
+  padding: 18px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: var(--amarillo);
+}
+
+.propuesta {
+  background: var(--amarillo);
+  color: var(--marron);
+  text-align: center;
+  padding: 9px;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* INICIO */
+
+.hero {
+  min-height: 440px;
+  padding: 75px 8%;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(45,25,15,.88), rgba(45,25,15,.25)),
+    url("https://images.unsplash.com/photo-1612392062631-94dd858cba88?auto=format&fit=crop&w=1600&q=85");
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 6vw, 65px);
+  margin-bottom: 18px;
+}
+
+.hero p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.boton {
+  display: inline-block;
+  background: var(--amarillo);
+  color: var(--marron);
+  padding: 13px 23px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.boton:hover {
+  background: #e6a936;
+  transform: translateY(-2px);
+}
+
+/* SECCIONES */
+
+section {
+  padding: 65px 8%;
+  scroll-margin-top: 20px;
+}
+
+.titulo {
+  text-align: center;
+  margin-bottom: 38px;
+}
+
+.titulo h2 {
+  color: var(--rojo);
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.titulo p {
+  color: #70594b;
+  line-height: 1.6;
+}
+
+.presentacion {
+  max-width: 850px;
+  margin: auto;
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+}
+
+.tarjeta {
+  background: var(--blanco);
+  padding: 28px;
+  border-radius: 15px;
+  box-shadow: 0 5px 18px rgba(60,35,20,.08);
+}
+
+.tarjeta h3 {
+  color: var(--rojo);
+  font-size: 21px;
+  margin-bottom: 13px;
+}
+
+.tarjeta p {
+  line-height: 1.7;
+}
+
+/* VALORES */
+
+.valores {
+  background: var(--rojo);
+  color: white;
+}
+
+.valores .titulo h2,
+.valores .titulo p {
+  color: white;
+}
+
+.valor {
+  background: rgba(255,255,255,.13);
+  padding: 23px;
+  border-radius: 13px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+/* MENÚ */
+
+.menu {
+  background: #f9e8ca;
+}
+
+.producto {
+  background: var(--blanco);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(60,35,20,.10);
+  transition: .25s;
+}
+
+.producto:hover {
+  transform: translateY(-5px);
+}
+
+/* IMÁGENES COMPLETAS, SIN RECORTAR */
+
+.producto img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  display: block;
+  background: #fff4df;
+  padding: 8px;
+}
+
+.producto-info {
+  padding: 21px;
+}
+
+.producto h3 {
+  color: var(--rojo);
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.producto p {
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 65px;
+}
+
+.precio {
+  display: block;
+  color: var(--rojo);
+  font-size: 24px;
+  font-weight: bold;
+  margin: 14px 0;
+}
+
+.producto button {
+  width: 100%;
+}
+
+.nota {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 13px;
+  color: #70594b;
+}
+
+/* EVENTOS */
+
+.eventos {
+  background: var(--blanco);
+}
+
+.evento-contenido {
+  max-width: 850px;
+  margin: auto;
+  text-align: center;
+  line-height: 1.8;
+}
+
+.evento-contenido > p {
+  margin-bottom: 25px;
+  font-size: 17px;
+}
+
+.evento-destacados {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  margin: 30px 0;
+}
+
+.evento-destacado {
+  background: var(--crema);
+  padding: 22px;
+  border-radius: 12px;
+  font-weight: bold;
+  color: var(--rojo);
+}
+
+.evento-destacado span {
+  display: block;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+/* FORMULARIO DE EVENTOS */
+
+.contratacion {
+  background: var(--crema);
+  padding: 35px;
+  border-radius: 18px;
+  margin: 35px auto 0;
+  max-width: 700px;
+  text-align: left;
+  box-shadow: 0 5px 18px rgba(60,35,20,.08);
+}
+
+.contratacion h3 {
+  text-align: center;
+  color: var(--rojo);
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.form-descripcion {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #70594b;
+  font-size: 14px;
+}
+
+.campo {
+  margin-bottom: 18px;
+}
+
+.campo label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #d9c6a9;
+  border-radius: 9px;
+  background: white;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  color: var(--marron);
+}
+
+.campo textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.formulario-boton {
+  width: 100%;
+  font-size: 16px;
+}
+
+.resultado {
+  display: none;
+  background: #e7f4e4;
+  color: #28532a;
+  padding: 18px;
+  border-radius: 10px;
+  margin-top: 20px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.aviso-formulario {
+  font-size: 12px;
+  color: #70594b;
+  text-align: center;
+  margin-top: 15px;
+  line-height: 1.5;
+}
+
+/* MI CLUB */
+
+.club {
+  background: var(--amarillo);
+  text-align: center;
+}
+
+.club h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.club p {
+  max-width: 680px;
+  margin: 0 auto 20px;
+  line-height: 1.8;
+  font-size: 17px;
+}
+
+.club-beneficio {
+  display: inline-block;
+  background: var(--rojo);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* CONTACTO Y PIE */
+
+footer {
+  background: var(--marron);
+  color: white;
+  text-align: center;
+  padding: 35px 15px;
+  line-height: 1.8;
+}
+
+footer h3 {
+  font-size: 23px;
+  margin-bottom: 8px;
+}
+
+footer small {
+  color: #e7c9a6;
+}
+
+@media (max-width: 650px) {
+  header {
+    justify-content: center;
+    text-align: center;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 13px;
+  }
+
+  nav a {
+    font-size: 13px;
+  }
+
+  .hero {
+    min-height: 390px;
+    padding: 55px 7%;
+  }
+
+  section {
+    padding: 50px 6%;
+  }
+
+  .producto img {
+    height: 230px;
+  }
+
+  .contratacion {
+    padding: 23px 18px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- ENCABEZADO -->
+<header>
+  <div class="logo">🌭 El Club de los Panchos</div>
 
-  <header>
-    <div class="logo">🌭 El Club de los Panchos</div>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#menu">Menú</a>
+    <a href="#eventos">Eventos</a>
+    <a href="#club">Mi Club</a>
+  </nav>
+</header>
 
-    <nav>
-      <a href="#inicio">Inicio</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#menu">Menú</a>
-      <a href="#eventos">Eventos</a>
-      <a href="#club">Mi Club</a>
-    </nav>
-  </header>
+<div class="propuesta">
+  PROPUESTA DE APLICACIÓN DIGITAL
+</div>
 
-  <div class="propuesta">
-    PROPUESTA DE APLICACIÓN DIGITAL
+<main>
+
+<!-- INICIO -->
+
+<section class="hero" id="inicio">
+  <div class="hero-content">
+    <h1>¡Bienvenidos al Club!</h1>
+    <p>
+      Mucho más que un pancho.
+      Sabores originales, combos para disfrutar
+      y una experiencia para compartir.
+    </p>
+    <a href="#menu" class="boton">Conocé nuestro menú</a>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+
+<section id="nosotros">
+
+  <div class="titulo">
+    <h2>Una marca para recordar</h2>
+    <p>Conocé nuestra identidad y lo que nos representa.</p>
   </div>
 
-  <main>
+  <div class="presentacion">
+    <p>
+      El Club de los Panchos es un emprendimiento gastronómico
+      de Durazno, dedicado a la elaboración y venta de panchos
+      y diferentes propuestas de comida rápida.
+      Buscamos diferenciarnos a través de nuestros combos,
+      la atención cercana y los servicios para eventos.
+    </p>
+  </div>
 
-    <!-- INICIO -->
+  <div class="tarjetas" style="margin-top: 35px;">
 
-    <section class="hero" id="inicio">
-      <div class="hero-content">
+    <article class="tarjeta">
+      <h3>Nuestra misión</h3>
+      <p>
+        Ofrecer una experiencia gastronómica diferente,
+        con calidad, variedad y atención cercana,
+        tanto en nuestro local como en eventos.
+      </p>
+    </article>
 
-        <h1>¡Bienvenidos al Club!</h1>
+    <article class="tarjeta">
+      <h3>Nuestra visión</h3>
+      <p>
+        Ser una empresa referente en panchos y catering
+        en Durazno, creciendo de forma responsable
+        y siendo reconocidos por nuestra propuesta.
+      </p>
+    </article>
 
-        <p>
-          Mucho más que un pancho.
-          Sabores originales, combos para disfrutar
-          y una experiencia para compartir.
-        </p>
+  </div>
+</section>
 
-        <a href="#menu" class="boton">
-          Conocé nuestro menú
-        </a>
+<!-- VALORES -->
 
+<section class="valores">
+
+  <div class="titulo">
+    <h2>Nuestros valores</h2>
+    <p>La base de nuestra forma de trabajar.</p>
+  </div>
+
+  <div class="tarjetas">
+    <div class="valor">⭐ Calidad</div>
+    <div class="valor">🤝 Compromiso</div>
+    <div class="valor">❤️ Atención cercana</div>
+    <div class="valor">💡 Innovación</div>
+    <div class="valor">♻️ Responsabilidad</div>
+  </div>
+
+</section>
+
+<!-- MENÚ -->
+
+<section class="menu" id="menu">
+
+  <div class="titulo">
+    <h2>Nuestro menú</h2>
+    <p>Seis propuestas para disfrutar.</p>
+  </div>
+
+  <div class="tarjetas">
+
+    <article class="producto">
+      <img src="clásico.jpg.jpg" alt="Combo Clásico">
+      <div class="producto-info">
+        <h3>Combo Clásico</h3>
+        <p>Pancho clásico, elección de salsa y papas pay.</p>
+        <span class="precio">$180</span>
+        <button class="boton" onclick="verProducto('Combo Clásico')">
+          Ver propuesta
+        </button>
       </div>
-    </section>
+    </article>
 
-    <!-- NOSOTROS -->
-
-    <section id="nosotros">
-
-      <div class="titulo">
-        <h2>Una marca para recordar</h2>
-        <p>Conocé nuestra identidad y lo que nos representa.</p>
+    <article class="producto">
+      <img src="pandequeso.jpg.PNG" alt="Pan de Queso Especial">
+      <div class="producto-info">
+        <h3>Pan de Queso Especial</h3>
+        <p>Pan de queso, salsa de ajo, muzzarella, criolla y pesto.</p>
+        <span class="precio">$290</span>
+        <button class="boton" onclick="verProducto('Pan de Queso Especial')">
+          Ver propuesta
+        </button>
       </div>
+    </article>
 
-      <div class="presentacion">
-        <p>
-          El Club de los Panchos es un emprendimiento gastronómico
-          de Durazno, dedicado a la elaboración y venta de panchos
-          y diferentes propuestas de comida rápida.
-          Buscamos diferenciarnos a través de nuestros combos,
-          la atención cercana y los servicios para eventos.
-        </p>
+    <article class="producto">
+      <img src="muzza.jpg.PNG" alt="Muzzarella y Panceta">
+      <div class="producto-info">
+        <h3>Muzzarella y Panceta</h3>
+        <p>Pancho con muzzarella y panceta, acompañado de papas noisette.</p>
+        <span class="precio">$280</span>
+        <button class="boton" onclick="verProducto('Muzzarella y Panceta')">
+          Ver propuesta
+        </button>
       </div>
+    </article>
 
-      <div class="tarjetas" style="margin-top: 35px;">
-
-        <article class="tarjeta">
-          <h3>Nuestra misión</h3>
-          <p>
-            Ofrecer una experiencia gastronómica diferente,
-            con calidad, variedad y atención cercana,
-            tanto en nuestro local como en eventos.
-          </p>
-        </article>
-
-        <article class="tarjeta">
-          <h3>Nuestra visión</h3>
-          <p>
-            Ser una empresa referente en panchos y catering
-            en Durazno, creciendo de forma responsable
-            y siendo reconocidos por nuestra propuesta.
-          </p>
-        </article>
-
+    <article class="producto">
+      <img src="delacasa.jpg.PNG" alt="Combo De la Casa">
+      <div class="producto-info">
+        <h3>De la Casa</h3>
+        <p>Pan de queso, pancho, salsa de la casa y papas fritas.</p>
+        <span class="precio">$280</span>
+        <button class="boton" onclick="verProducto('Combo De la Casa')">
+          Ver propuesta
+        </button>
       </div>
+    </article>
 
-    </section>
-
-    <!-- VALORES -->
-
-    <section class="valores">
-
-      <div class="titulo">
-        <h2>Nuestros valores</h2>
-        <p>La base de nuestra forma de trabajar.</p>
+    <article class="producto">
+      <img src="salchipapas.jpg.jpg" alt="Salchipapas">
+      <div class="producto-info">
+        <h3>Salchipapas</h3>
+        <p>Una combinación de papas y salchichas, ideal para disfrutar.</p>
+        <span class="precio">$350</span>
+        <button class="boton" onclick="verProducto('Salchipapas')">
+          Ver propuesta
+        </button>
       </div>
+    </article>
 
-      <div class="tarjetas">
-
-        <div class="valor">⭐ Calidad</div>
-
-        <div class="valor">🤝 Compromiso</div>
-
-        <div class="valor">❤️ Atención cercana</div>
-
-        <div class="valor">💡 Innovación</div>
-
-        <div class="valor">♻️ Responsabilidad</div>
-
+    <article class="producto">
+      <img src="kids.jpg.PNG" alt="Combo Kids">
+      <div class="producto-info">
+        <h3>Combo Kids</h3>
+        <p>Pan de queso, salsa a elección, papas pay, papas onduladas y Cepita.</p>
+        <span class="precio">$200</span>
+        <button class="boton" onclick="verProducto('Combo Kids')">
+          Ver propuesta
+        </button>
       </div>
+    </article>
 
-    </section>
+  </div>
 
-    <!-- MENÚ -->
+  <p class="nota">Precios expresados en pesos uruguayos.</p>
 
-    <section class="menu" id="menu">
+</section>
 
-      <div class="titulo">
-        <h2>Nuestro menú</h2>
-        <p>Seis propuestas para disfrutar.</p>
-      </div>
+<!-- EVENTOS -->
 
-      <div class="tarjetas">
+<section class="eventos" id="eventos">
 
-        <!-- CLÁSICO -->
+  <div class="titulo">
+    <h2>También estamos en tus eventos</h2>
+    <p>Compartimos nuestros sabores en ocasiones especiales.</p>
+  </div>
 
-        <article class="producto">
+  <div class="evento-contenido">
 
-          <img
-            src="clásico.jpg.jpg"
-            alt="Combo Clásico"
-          >
+    <p>
+      Además de nuestro local, ofrecemos una propuesta de catering
+      para cumpleaños, reuniones y diferentes eventos.
+      Nos adaptamos a la cantidad de personas y a las necesidades
+      de cada ocasión.
+    </p>
 
-          <div class="producto-info">
+    <div class="evento-destacados">
 
-            <h3>Combo Clásico</h3>
-
-            <p>
-              Pancho clásico, elección de salsa y papas pay.
-            </p>
-
-            <span class="precio">$180</span>
-
-            <button class="boton"
-              onclick="verProducto('Combo Clásico')">
-              Ver propuesta
-            </button>
-
-          </div>
-        </article>
-
-        <!-- PAN DE QUESO ESPECIAL -->
-
-        <article class="producto">
-
-          <img
-            src="pandequeso.jpg.PNG"
-            alt="Pan de Queso Especial"
-          >
-
-          <div class="producto-info">
-
-            <h3>Pan de Queso Especial</h3>
-
-            <p>
-              Pan de queso, salsa de ajo, muzzarella,
-              criolla y pesto.
-            </p>
-
-            <span class="precio">$290</span>
-
-            <button class="boton"
-              onclick="verProducto('Pan de Queso Especial')">
-              Ver propuesta
-            </button>
-
-          </div>
-        </article>
-
-        <!-- MUZZARELLA Y PANCETA -->
-
-        <article class="producto">
-
-          <img
-            src="muzza.jpg.PNG"
-            alt="Muzzarella y Panceta"
-          >
-
-          <div class="producto-info">
-
-            <h3>Muzzarella y Panceta</h3>
-
-            <p>
-              Pancho con muzzarella y panceta,
-              acompañado de papas noisette.
-            </p>
-
-            <span class="precio">$280</span>
-
-            <button class="boton"
-              onclick="verProducto('Muzzarella y Panceta')">
-              Ver propuesta
-            </button>
-
-          </div>
-        </article>
-
-        <!-- DE LA CASA -->
-
-        <article class="producto">
-
-          <img
-            src="delacasa.jpg.PNG"
-            alt="Combo De la Casa"
-          >
-
-          <div class="producto-info">
-
-            <h3>De la Casa</h3>
-
-            <p>
-              Pan de queso, pancho, salsa de la casa
-              y papas fritas.
-            </p>
-
-            <span class="precio">$280</span>
-
-            <button class="boton"
-              onclick="verProducto('Combo De la Casa')">
-              Ver propuesta
-            </button>
-
-          </div>
-        </article>
-
-        <!-- SALCHIPAPAS -->
-
-        <article class="producto">
-
-          <img
-            src="salchipapas.jpg.jpg"
-            alt="Salchipapas"
-          >
-
-          <div class="producto-info">
-
-            <h3>Salchipapas</h3>
-
-            <p>
-              Una combinación de papas y salchichas,
-              ideal para disfrutar.
-            </p>
-
-            <span class="precio">$350</span>
-
-            <button class="boton"
-              onclick="verProducto('Salchipapas')">
-              Ver propuesta
-            </button>
-
-          </div>
-        </article>
-
-        <!-- KIDS -->
-
-        <article class="producto">
-
-          <img
-            src="kids.jpg.PNG"
-            alt="Combo Kids"
-          >
-
-          <div class="producto-info">
-
-            <h3>Combo Kids</h3>
-
-            <p>
-              Pan de queso, salsa a elección,
-              papas pay, papas onduladas y Cepita.
-            </p>
-
-            <span class="precio">$200</span>
-
-            <button class="boton"
-              onclick="verProducto('Combo Kids')">
-              Ver propuesta
-            </button>
-
-          </div>
-        </article>
-
+      <div class="evento-destacado">
+        <span>🎉</span>
+        Cumpleaños
       </div>
 
-      <p class="nota">
-        Precios expresados en pesos uruguayos.
+      <div class="evento-destacado">
+        <span>🥳</span>
+        Reuniones
+      </div>
+
+      <div class="evento-destacado">
+        <span>🌭</span>
+        Eventos especiales
+      </div>
+
+    </div>
+
+    <a href="#contratar" class="boton">
+      Conocé nuestra propuesta
+    </a>
+
+    <!-- FORMULARIO PARA CONTRATAR -->
+
+    <div class="contratacion" id="contratar">
+
+      <h3>¡Organicemos tu evento!</h3>
+
+      <p class="form-descripcion">
+        Completá los datos y contanos qué estás organizando.
       </p>
 
-    </section>
+      <form id="formEvento">
 
-    <!-- EVENTOS -->
-
-    <section class="eventos" id="eventos">
-
-      <div class="titulo">
-        <h2>También estamos en tus eventos</h2>
-        <p>Compartimos nuestros sabores en ocasiones especiales.</p>
-      </div>
-
-      <div class="evento-contenido">
-
-        <p>
-          Además de nuestro local, ofrecemos una propuesta
-          de catering para cumpleaños, reuniones y diferentes
-          eventos. Nos adaptamos a la cantidad de personas
-          y a las necesidades de cada ocasión.
-        </p>
-
-        <div class="evento-destacados">
-
-          <div class="evento-destacado">
-            <span>🎉</span>
-            Cumpleaños
-          </div>
-
-          <div class="evento-destacado">
-            <span>🥳</span>
-            Reuniones
-          </div>
-
-          <div class="evento-destacado">
-            <span>🌭</span>
-            Eventos especiales
-          </div>
-
+        <div class="campo">
+          <label for="nombre">Nombre y apellido</label>
+          <input
+            type="text"
+            id="nombre"
+            placeholder="Ingresá tu nombre"
+            required
+          >
         </div>
 
-        <a href="#contacto" class="boton">
-          Conocé nuestra propuesta
-        </a>
+        <div class="campo">
+          <label for="telefono">Teléfono de contacto</label>
+          <input
+            type="tel"
+            id="telefono"
+            placeholder="Tu número de teléfono"
+            required
+          >
+        </div>
 
-      </div>
+        <div class="campo">
+          <label for="tipoEvento">¿Qué tipo de evento estás organizando?</label>
+          <select id="tipoEvento" required>
+            <option value="">Seleccioná una opción</option>
+            <option>Cumpleaños</option>
+            <option>Reunión familiar</option>
+            <option>Evento empresarial</option>
+            <option>Fiesta o celebración</option>
+            <option>Otro evento</option>
+          </select>
+        </div>
 
-    </section>
+        <div class="campo">
+          <label for="fecha">Fecha del evento</label>
+          <input type="date" id="fecha" required>
+        </div>
 
-    <!-- MI CLUB -->
+        <div class="campo">
+          <label for="personas">Cantidad de personas</label>
+          <select id="personas" required>
+            <option value="">Seleccioná una cantidad</option>
+            <option>30 personas</option>
+            <option>50 personas</option>
+            <option>100 personas</option>
+            <option>Otra cantidad</option>
+          </select>
+        </div>
 
-    <section class="club" id="club">
+        <div class="campo" id="otraCantidadCampo" style="display:none;">
+          <label for="otraCantidad">¿Cuántas personas?</label>
+          <input
+            type="number"
+            id="otraCantidad"
+            min="1"
+            placeholder="Ingresá la cantidad"
+          >
+        </div>
 
-      <h2>❤️ ¡Ser parte tiene sus beneficios!</h2>
+        <div class="campo">
+          <label for="detalles">Contanos un poco más</label>
+          <textarea
+            id="detalles"
+            placeholder="Lugar del evento, preferencias, consultas..."
+          ></textarea>
+        </div>
 
-      <p>
-        Proponemos un programa de fidelización para premiar
-        a quienes nos eligen. Con cada compra, los clientes
-        pueden acercarse a conseguir un combo gratis.
+        <button type="submit" class="boton formulario-boton">
+          Enviar solicitud
+        </button>
+
+      </form>
+
+      <div class="resultado" id="resultado"></div>
+
+      <p class="aviso-formulario">
+        Esta es una demostración de la propuesta de aplicación.
+        El envío no genera una reserva real ni confirma una contratación.
       </p>
 
-      <div class="club-beneficio">
-        ¡Cada compra te acerca a tu próximo combo!
-      </div>
+    </div>
 
-    </section>
+  </div>
 
-    <!-- CONTACTO -->
+</section>
 
-    <section id="contacto">
+<!-- MI CLUB -->
 
-      <div class="titulo">
-        <h2>¡Conocé El Club!</h2>
-        <p>Una propuesta diferente en Durazno.</p>
-      </div>
+<section class="club" id="club">
 
-      <div class="presentacion">
+  <h2>❤️ ¡Ser parte tiene sus beneficios!</h2>
 
-        <p>
-          Calidad, sabor y una experiencia para compartir.
-        </p>
+  <p>
+    Proponemos un programa de fidelización para premiar
+    a quienes nos eligen. Con cada compra, los clientes
+    pueden acercarse a conseguir un combo gratis.
+  </p>
 
-        <p>
-          El Club de los Panchos · Durazno, Uruguay.
-        </p>
+  <div class="club-beneficio">
+    ¡Cada compra te acerca a tu próximo combo!
+  </div>
 
-      </div>
+</section>
 
-    </section>
+</main>
 
-  </main>
+<footer>
+  <h3>🌭 El Club de los Panchos</h3>
+  <p>Mucho más que un pancho.</p>
+  <p>Durazno, Uruguay</p>
+  <small>Propuesta de aplicación digital · Proyecto académico</small>
+</footer>
 
-  <!-- PIE DE PÁGINA -->
+<script>
 
-  <footer>
+// DEMOSTRACIÓN DE LOS PRODUCTOS
 
-    <h3>🌭 El Club de los Panchos</h3>
+function verProducto(nombre) {
+  alert(
+    nombre +
+    "\n\nEsta función forma parte de la demostración " +
+    "de la propuesta de aplicación."
+  );
+}
 
-    <p>Mucho más que un pancho.</p>
+// MOSTRAR CAMPO DE OTRA CANTIDAD DE PERSONAS
 
-    <p>Durazno, Uruguay</p>
+const personas = document.getElementById("personas");
+const otraCantidadCampo = document.getElementById("otraCantidadCampo");
+const otraCantidad = document.getElementById("otraCantidad");
 
-    <small>
-      Propuesta de aplicación digital · Proyecto académico
-    </small>
+personas.addEventListener("change", function() {
+  const mostrar = personas.value === "Otra cantidad";
 
-  </footer>
+  otraCantidadCampo.style.display = mostrar ? "block" : "none";
+  otraCantidad.required = mostrar;
 
-  <script>
+  if (!mostrar) {
+    otraCantidad.value = "";
+  }
+});
 
-    function verProducto(nombre) {
+// EVITAR FECHAS PASADAS
 
-      alert(
-        nombre +
-        "\n\nEsta función forma parte de la demostración " +
-        "de la propuesta de aplicación."
-      );
+const fechaEvento = document.getElementById("fecha");
 
-    }
+const hoy = new Date();
+const fechaMinima =
+  hoy.getFullYear() + "-" +
+  String(hoy.getMonth() + 1).padStart(2, "0") + "-" +
+  String(hoy.getDate()).padStart(2, "0");
 
-  </script>
+fechaEvento.min = fechaMinima;
+
+// FORMULARIO DE EVENTOS
+
+document.getElementById("formEvento").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const nombre = document.getElementById("nombre").value;
+  const telefono = document.getElementById("telefono").value;
+  const tipo = document.getElementById("tipoEvento").value;
+  const fecha = document.getElementById("fecha").value;
+
+  let cantidad = personas.value;
+
+  if (cantidad === "Otra cantidad") {
+    cantidad = otraCantidad.value + " personas";
+  }
+
+  const detalles = document.getElementById("detalles").value;
+
+  const resultado = document.getElementById("resultado");
+
+  resultado.style.display = "block";
+
+  resultado.innerHTML =
+    "<strong>¡Solicitud preparada, " + escaparHTML(nombre) + "!</strong><br><br>" +
+    "Tipo de evento: " + escaparHTML(tipo) + "<br>" +
+    "Fecha: " + escaparHTML(fecha) + "<br>" +
+    "Cantidad: " + escaparHTML(cantidad) + "<br>" +
+    "Teléfono: " + escaparHTML(telefono) + "<br><br>" +
+    "Tu solicitud quedó registrada en esta demostración. " +
+    "La contratación deberá confirmarse por contacto directo.";
+
+  resultado.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+});
+
+// PROTEGER EL TEXTO MOSTRADO EN EL RESULTADO
+
+function escaparHTML(texto) {
+  return String(texto).replace(/[&<>"']/g, function(caracter) {
+    return {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    }[caracter];
+  });
+}
+
+</script>
 
 </body>
 </html>

@@ -543,8 +543,8 @@
           </p>
 
           <div class="valores">
+
             <div class="valor">
-              <div class="icono">🎯</div>
               <h3>Misión</h3>
               <p>
                 Ofrecer una experiencia gastronómica diferente, con calidad,
@@ -553,7 +553,6 @@
             </div>
 
             <div class="valor">
-              <div class="icono">🚀</div>
               <h3>Visión</h3>
               <p>
                 Ser una empresa referente en panchos y catering en Durazno,
@@ -562,12 +561,12 @@
             </div>
 
             <div class="valor">
-              <div class="icono">❤️</div>
               <h3>Valores</h3>
               <p>
                 Calidad, compromiso, atención cercana, innovación y responsabilidad.
               </p>
             </div>
+
           </div>
         </div>
       </div>
@@ -586,9 +585,7 @@
             <img src="clásico.jpg.jpg" alt="Combo Clásico">
             <div class="producto-info">
               <h3>Clásico</h3>
-              <p>
-                Pancho con salsa a elección y papas pay.
-              </p>
+              <p>Pancho con salsa a elección y papas pay.</p>
               <div class="precio">$180</div>
             </div>
           </article>
@@ -597,9 +594,7 @@
             <img src="pandequeso.jpg.PNG" alt="Pan de queso especial">
             <div class="producto-info">
               <h3>Pan de queso especial</h3>
-              <p>
-                Pan de queso, salsa de ajo, muzzarella, criolla y pesto.
-              </p>
+              <p>Pan de queso, salsa de ajo, muzzarella, criolla y pesto.</p>
               <div class="precio">$290</div>
             </div>
           </article>
@@ -608,9 +603,7 @@
             <img src="muzza.jpg.PNG" alt="Muzzarella y panceta">
             <div class="producto-info">
               <h3>Muzzarella y panceta</h3>
-              <p>
-                Una combinación de muzzarella, panceta y papas noisette.
-              </p>
+              <p>Una combinación de muzzarella, panceta y papas noisette.</p>
               <div class="precio">$280</div>
             </div>
           </article>
@@ -619,9 +612,7 @@
             <img src="delacasa.jpg.PNG" alt="Combo De la casa">
             <div class="producto-info">
               <h3>De la casa</h3>
-              <p>
-                Pan de queso, pancho, salsa de la casa y papas fritas.
-              </p>
+              <p>Pan de queso, pancho, salsa de la casa y papas fritas.</p>
               <div class="precio">$280</div>
             </div>
           </article>
@@ -630,9 +621,7 @@
             <img src="salchipapas.jpg.jpg" alt="Salchipapas">
             <div class="producto-info">
               <h3>Salchipapas</h3>
-              <p>
-                Una combinación de papas fritas, salchichas y salsas.
-              </p>
+              <p>Una combinación de papas fritas, salchichas y salsas.</p>
               <div class="precio">$350</div>
             </div>
           </article>
@@ -641,9 +630,7 @@
             <img src="kids.jpg.PNG" alt="Combo Kids">
             <div class="producto-info">
               <h3>Kids</h3>
-              <p>
-                Pan de queso, salsa a elección, papas pay, papas onduladas y Cepita.
-              </p>
+              <p>Pan de queso, salsa a elección, papas pay, papas onduladas y Cepita.</p>
               <div class="precio">$200</div>
             </div>
           </article>
@@ -684,11 +671,10 @@
     <section class="formulario" id="consulta-eventos">
       <div class="formulario-contenido">
         <h3>Consultá por tu evento</h3>
-        <p>
-          Completá estos datos para preparar una propuesta.
-        </p>
+        <p>Completá estos datos para preparar una propuesta.</p>
 
         <form id="formEvento">
+
           <div class="campo">
             <label for="nombre">Nombre y apellido</label>
             <input type="text" id="nombre" required placeholder="Tu nombre">
@@ -759,6 +745,7 @@
           <p>
             ¡Cuantas más veces nos elijas, más cerca estás de tu recompensa!
           </p>
+
           <a
             class="boton boton-rojo"
             href="https://wa.me/59892364178"
@@ -784,6 +771,7 @@
             <div class="icono">📍</div>
             <h3>Dirección</h3>
             <p>Brig. Gral. Manuel Oribe 895<br>Durazno, Uruguay</p>
+
             <a
               class="boton"
               href="https://maps.app.goo.gl/3eFt8J7AEv81GuJt9?g_st=ic"
@@ -798,6 +786,7 @@
             <div class="icono">📱</div>
             <h3>WhatsApp</h3>
             <p>092 364 178</p>
+
             <a
               class="boton"
               href="https://wa.me/59892364178"
@@ -830,16 +819,16 @@
   </footer>
 
   <script>
-    // Evita seleccionar fechas anteriores a hoy.
     const fechaEvento = document.getElementById("fecha");
+
     const hoy = new Date();
+
     const fechaLocal = new Date(
       hoy.getTime() - hoy.getTimezoneOffset() * 60000
     ).toISOString().split("T")[0];
 
     fechaEvento.min = fechaLocal;
 
-    // Formulario de demostración.
     document.getElementById("formEvento").addEventListener("submit", function(e) {
       e.preventDefault();
 
